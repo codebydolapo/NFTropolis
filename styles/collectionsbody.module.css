@@ -1,0 +1,17 @@
+.banner{
+    background: url('/images/bannerSlim.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    /* color: #353840 */
+}
+
+
+.itemsContainer::-webkit-scrollbar{
+    display: none
+}
+
+.detailDiv::-webkit-scrollbar{
+    display: none
+}

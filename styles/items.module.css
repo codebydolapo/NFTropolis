@@ -1,0 +1,15 @@
+.item{
+    box-shadow: 1px 1px 10px grey;
+}
+
+
+.image{
+    transition: all ease 500ms;
+}
+
+@media only screen and (min-width: 500px){
+
+    .image:hover{
+        transform: scale(1.1)
+    }
+}

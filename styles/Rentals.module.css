@@ -1,0 +1,25 @@
+.container{
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    color: rgba(0, 0, 0, 0.774);
+    /* border: 1px solid black; */
+}
+
+/* .container {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    color: rgba(0, 0, 0, 0.774);
+
+
+} */
