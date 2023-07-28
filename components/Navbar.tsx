@@ -2,7 +2,7 @@ import { UserCircleIcon, CreditCardIcon, SearchIcon, XIcon } from '@heroicons/re
 import Link from 'next/link'
 import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // import { saveAccount } from './reducers/action'
 import { marketplaceAddress } from '../src/marketplaceAddress'
 import { minterAddress } from '../src/minterAddress'
@@ -20,49 +20,64 @@ function Navbar() {
 
     const dispatch = useDispatch()
 
+
     const [connectSwitch, setconnectSwitch] = useState(false)
-    const [account, setAccount] = useState("")
+    const [__account, setAccount] = useState("")
     // const [network, setNetwork] = useState("")
 
+    const activeNav = "#FFBF00"
+    const inactiveNav = "FFF"
+
+    const [connectedStatus, setConnectedStatus] = useState<boolean | undefined>(false)
+
+    const account: any = useSelector((state: any) => { state.account })
+    let Window: any;
 
 
-    // useEffect(() => {
-    //     let Window: any = window
-    //     if (connectSwitch && Window.ethereum !== undefined) {
-    //         setAccount("")
-    //         dispatch(saveAccount(""))
-    //         dispatch(saveMarketplaceContract(null))
-    //         dispatch(saveMinterContract(null))
+    useEffect(() => {
+        Window = (window as any).ethereum
+    }, [account])
 
-    //         let provider = Window.ethereum
-    //         let ethersProvider = new ethers.providers.Web3Provider(provider);
+    const connect = () => {
+        if (!Window) {
+            console.log("please install MetaMask")
+            return
+        }
+        const provider = new ethers.providers.Web3Provider(Window)
 
-    //         Window.ethereum.request({ method: "eth_requestAccounts" })
-    //             .then((accounts: any) => {
-    //                 setAccount(accounts[0])
-    //                 dispatch(saveAccount(accounts[0]))
-    //                 console.log(accounts[0])
-    //             })
-    //             .catch((err: any) => console.log(err))
+        setConnectedStatus(true)
 
-    //         let signer = ethersProvider.getSigner()
+        provider.send("eth_requestAccounts", [])
+            .then((accounts) => {
+                if (accounts.length > 0) {
+                    // setCurrentAccount(accounts[0])
+                    console.log(accounts[0])
+                    dispatch(saveAccount(accounts[0]))
+                    localStorage.setItem("_account", accounts[0])
+                }
+                setAccount(accounts[0])
+            })
+            .catch((e) => console.log(e))
+    }
 
-    //         // const minter: any | undefined = new ethers.Contract(minterAddress, minterABI.abi, signer)
-    //         // const marketplace: any | undefined = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
+    const disconnect = () => {
+        console.log("onClickDisConnect")
+        // setBalance(undefined)
+        // setCurrentAccount(undefined)
+        // dispatch(saveAccount(''))
+        setAccount('')
+        setConnectedStatus(false)
+        localStorage.setItem("_account", "")
+    }
 
-
-    //         if (marketplace) {
-    //             dispatch(saveMarketplaceContract(marketplace))
-    //             dispatch(saveMinterContract(minter))
-    //             // console.log(marketplace)
-    //             // console.log(account)
-    //         }
-
-    //     } else if (connectSwitch && Window.ethereum == undefined) {
-    //         alert("Please Download Metamask")
-    //     }
-    //     setconnectSwitch(false)
-    // }, [connectSwitch])
+    function handleConnection() {
+        if (!connectedStatus) {
+            connect()
+        }
+        else {
+            disconnect()
+        }
+    }
 
 
 
@@ -76,7 +91,7 @@ function Navbar() {
             <div className={`w-[55%] h-full flex items-center justify-between`}>
                 <div className={`md:w-[30%] h-full flex items-center md:justify-center xs:w-[100%] xs:justify-start`}>
                     <img className={`md:w-[40px] h-[40px] rounded-full md:mx-2 xs:w-[40px] xs:h-[40px] xs:mx-1`} alt='' src='/icons/logo.jpg' />
-                    <h1 className={`font-extrabold md:text-5xl text-[#1c1e21ea] xs:text-2xl`}><b className={`text-[#1da1f2]`}>NFT</b>ropolis</h1>
+                    <h1 className={`font-extrabold md:text-4xl text-[#1c1e21ea] xs:text-2xl`}><b className={`text-[#1da1f2]`}>NFT</b>ropolis</h1>
                 </div>
                 <div className={`w-[67%] h-[80%] flex items-center justify-between border-2 border-grey rounded-lg md:visible xs:hidden`}>
                     <div className={`w-[3rem] h-full flex justify-center items-center cursor-pointer`}>
@@ -108,12 +123,12 @@ function Navbar() {
                     </div> */}
                 </div>
                 <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-full justify-center items-center `}>
-                    {account !== "" ?
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
-                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${account.slice(0, 6)}...${account.slice(38, 42)}`}</h1>
+                    {__account ?
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`}>
+                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${__account.slice(0, 6)}...${__account.slice(38, 42)}`}</h1>
                         </div>
                         :
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={handleConnection}>
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
                         </div>
                     }

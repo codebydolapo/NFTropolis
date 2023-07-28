@@ -43,6 +43,7 @@ export const account = (state = "", action: {type: string, account: any} )=>{
 }
 
 export const marketplaceContract= (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
+    console.log(action.contractInstance)
     switch(action.type){
         case "SAVE_MARKETPLACE_CONTRACT":
             return state = action.contractInstance;

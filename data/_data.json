@@ -1,60 +1,58 @@
-
-
-export const digitalArt = [
+[
     {
         "name": "NFT 1",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft1.png",
-        "price": "0.03",
+        "price": "0.0003",
         "index": 1
     },
     {
         "name": "NFT 2",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft2.png",
-        "price": "0.02",
+        "price": "0.0002",
         "index": 2
     },
     {
         "name": "NFT 3",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft3.jpg",
-        "price": "0.03",
+        "price": "0.0003",
         "index": 3
     },
     {
         "name": "NFT 4",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft4.jpg",
-        "price": "0.02",
+        "price": "0.0002",
         "index": 4
     },
     {
         "name": "NFT 5",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft5.png",
-        "price": "0.05",
+        "price": "0.0005",
         "index": 5
     },
     {
         "name": "NFT 6",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft6.png",
-        "price": "0.02",
+        "price": "0.0002",
         "index": 6
     },
     {
         "name": "NFT 7",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft7.png",
-        "price": "0.05",
+        "price": "0.0005",
         "index": 7
     },
     {
         "name": "NFT 8",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt nihil neque voluptatum doloribus, quas voluptate consequatur. Officia soluta aspernatur sequi, dolore ipsam odio eos, quod modi atque culpa sed nesciunt.",
         "image": "/nfts/digitalArt/nft8.png",
-        "price": "0.02",
+        "price": "0.0002",
         "index": 8
     },
     {

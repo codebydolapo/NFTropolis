@@ -1,13 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-type Data = {
-  name: string
-}
+import metadata from "../../data/data.json"
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Metadata | any>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  const { id } = req.query
+  const _id = Number(id) - 1
+  res.status(200).json(metadata[Number(_id)])
 }

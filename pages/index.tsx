@@ -1,11 +1,65 @@
 import type { NextPage } from 'next'
+import {ethers} from 'ethers'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar'
 import Landing from '../components/Landing'
 import { useEffect } from 'react'
+import { saveMarketplaceContract, saveMinterContract } from '../components/reducers/action'
+import { useDispatch } from 'react-redux'
+import {nfTropolisAddress} from '../src/nfTropolisAddress'
+import nfTropolisABI from '../artifacts/contracts/NFTropolis.sol/NFTropolis.json'
+import minterABI from '../artifacts/contracts/minter.sol/minter.json'
+import { minterAddress } from '../src/minterAddress'
+
 
 const Home: NextPage = () => {
+
+  let Window: any;
+
+  const dispatch = useDispatch()
+
+  
+  // useEffect(() => {
+  //     Window = (window as any).ethereum
+  // }, [])
+
+  // const startUp = async () => {
+
+  //   if (!Window) {
+  //     alert("Please install MetaMask!");
+  //     return;
+  //   }
+
+  //   const provider = new ethers.providers.Web3Provider(Window);
+  //   const signer = provider.getSigner();
+
+  //   const nfTropolis = new ethers.Contract(
+  //     nfTropolisAddress,
+  //     nfTropolisABI.abi,
+  //     provider
+  //   );
+
+  //   const minter = new ethers.Contract(
+  //     minterAddress,
+  //     minterABI.abi,
+  //     provider
+  //   )
+
+  // dispatch(saveMarketplaceContract(nfTropolis));
+  // dispatch(saveMinterContract(minter));
+
+  // // console.log(nfTropolis)
+    
+
+  //   // const response = await minter.tokenCount();
+  //   // console.log(Number(response));
+
+  // };
+
+  // useEffect(()=>{
+  //   startUp();
+  // }, [])
 
     return (
       <div className={`font-montserrat ${styles.container}`}>

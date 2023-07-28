@@ -1,45 +1,57 @@
-import { ethers } from "hardhat";
-// const Minter = "../artifacts/contracts/Minter.sol/Minter.json"
-const metadata = "../metadata"
+const { ethers } = require("hardhat");
 import fs from "fs"
-// import "../src/contractInformation"
+import metadata from "../data/data.json"
+// import {nfTropolisAddress} from '../src/nfTropolisAddress'
 
 async function main() {
-    const [owner, customer] = await ethers.getSigners();
+    const [owner] = await ethers.getSigners();
     const Minter = await ethers.getContractFactory("Minter");
-    const minter = await Minter.deploy();
+    const minter = await Minter.deploy("NFTropolis", "NFTR");
 
     await minter.deployed();
 
-    const Marketplace = await ethers.getContractFactory("Marketplace");
-    const marketplace = await Marketplace.deploy(minter.address, owner.address);
+    // const account = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    const [account] = await ethers.getSigners();
 
-    await marketplace.deployed();
-    console.log(`Minter delivered to Marketplace at ${marketplace.address}`);
+    const NFTropolis = await ethers.getContractFactory("NFTropolis");
+    const nftTropolis = await NFTropolis.deploy(minter.address);
 
-    // fs.writeFileSync("src/MinterAddress.txt", Minter.address)
-    fs.writeFileSync("src/minterAddress.js", `export const minterAddress = "${minter.address}"`)
-    fs.writeFileSync("src/marketplaceAddress.js", `export const marketplaceAddress = "${marketplace.address}"`)
+    await nftTropolis.deployed();
     
-    for(let i=1; i<9; i++){
-        let mintedMinter = await minter.mint(`../metadata/architecture/item${i}.json`, marketplace.address);
-        console.log(`Architecture NFTs minted with hash ${mintedMinter.hash}`)
+    fs.writeFileSync("src/minterAddress.js", `export const minterAddress = "${minter.address}"`)
+    fs.writeFileSync("src/nfTropolisAddress.js", `export const nfTropolisAddress = "${nftTropolis.address}"`)
+
+    const jsonData = fs.readFileSync("data/data.json", 'utf-8')
+    const parsedData = JSON.parse(jsonData);
+    // console.log(parsedData[2])
+
+    async function handleDeploy(index: number){
+        const remainder = index % 3
+        const price = parsedData[index].price;
+        let mintHash = await minter.mintNFT(account.address, `http://localhost:3000/api/${index}`);
+        console.log(`NFT minted with address ${mintHash.hash}`);
+        if(remainder !== 0){
+            const receipt = await nftTropolis.connect(account).createOffer((index + 1), ethers.utils.parseEther(price));
+            console.log(index)
+            console.log(`NFT offered with hash ${receipt.hash}`)
+        }
     }
 
-    for(let i=1; i<19; i++){
-        let mintedMinter = await minter.mint(`../metadata/digitalArt/item${i}.json`, marketplace.address);
-        console.log(`digitalArt NFTs minted with hash ${mintedMinter.hash}`)
+    // async function handleDeploy(index: number){
+    //     let mintHash = await minter.mintNFT(account.address, `http://localhost:3000/api/${index}`);
+    //     console.log(mintHash)
+    // }
+
+    
+    for(let i=0; i<metadata.length; i++){
+        try{
+            handleDeploy(i)
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
-    for(let i=1; i<11; i++){
-        let mintedMinter = await minter.mint(`../metadata/nature/item${i}.json`, marketplace.address);
-        console.log(`Nature NFTs minted with hash ${mintedMinter.hash}`)
-    }
-
-    for(let i=1; i<10; i++){
-        let mintedMinter = await minter.mint(`../metadata/space/item${i}.json`, marketplace.address);
-        console.log(`Space NFTs minted with hash ${mintedMinter.hash}`)
-    }
 
 }
 

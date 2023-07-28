@@ -1,5 +1,6 @@
-import "@nomicfoundation/hardhat-toolbox";
-// require("@nomicfoundation/hardhat-toolbox")
+// import "@nomicfoundation/hardhat-toolbox";
+require("@nomicfoundation/hardhat-toolbox")
+// require("@nomiclabs/hardhat-waffle")
 require("dotenv").config()
 
 
@@ -42,4 +43,10 @@ module.exports = {
   // mocha: {
   //   timeout: 200000, // 200 seconds max for running tests
   // },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
 }

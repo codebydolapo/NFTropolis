@@ -1,208 +1,91 @@
-import { expect } from "chai";
-import { ethers } from "hardhat";
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
 
-describe("Marketplace", function () {
-  let marketplace: any;
+describe("NFTropolis", function () {
+  let nfTropolis: any;
   let minter: any;
-  let owner: any;
-  let user1: any;
-  let user2: any;
-  let tokenId1: number;
-  let tokenId2: number;
-  const listingFee = ethers.utils.parseEther("0.001");
+  let owner;
+  let seller: any;
+  let buyer: any;
+  let tokenId: any;
+  const price = ethers.utils.parseEther("0.0001");
 
   beforeEach(async function () {
     const Minter = await ethers.getContractFactory("Minter");
-    minter = await Minter.deploy();
+    minter = await Minter.deploy("MyNFT", "NFT");
+    await minter.deployed();
 
-    const Marketplace = await ethers.getContractFactory("Marketplace");
-    [owner, user1, user2] = await ethers.getSigners();
-    marketplace = await Marketplace.deploy(minter.address, owner.address);
+    const NFTropolis = await ethers.getContractFactory("NFTropolis");
+    [owner, seller, buyer] = await ethers.getSigners();
+    nfTropolis = await NFTropolis.deploy(minter.address);
+    await nfTropolis.deployed();
 
-    await minter.connect(user1).mint("NFT1", user1.address);
-    tokenId1 = await minter.getLatestTokenId();
-    await minter.connect(user2).mint("NFT2", user2.address);
-    tokenId2 = await minter.getLatestTokenId();
+    // Mint an NFT and transfer it to the seller
+    await minter.connect(owner).mintNFT(seller.address, "www.exampleToken.com");
+    const _tokenId = await minter.getIndex(seller.address)
+    tokenId = Number(_tokenId)
+    // console.log(tokenId)
+    // tokenId = await minter.tokenOfOwnerByIndex(seller.address, 0);
+    await minter.connect(seller).approve(nfTropolis.address, 1);
   });
 
-  describe("mintNFT", function () {
-    it("should mint an NFT and return its token ID", async function () {
-      const result = await marketplace.connect(user1).mintNFT("NFT3");
-      const tokenId = result.toNumber();
-      expect(tokenId).to.be.equal(3);
-    });
+  it("should create a new offer", async function () {
+    await nfTropolis.connect(seller).createOffer(tokenId, price);
+
+    const offer = await nfTropolis.getOffer(1);
+    // console.log(offer)
+    expect(Number(offer[0])).to.equal(1);
+    expect(Number(offer[1])).to.equal(tokenId);
+    expect(offer[2]).to.equal(seller.address);
+    expect(Number(offer[3])).to.equal(price);
+    expect(offer[4]).to.be.true;
   });
 
-  describe("listNFT", function () {
-    it("should list an NFT for sale in the marketplace", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
+  it("should buy an NFT from an offer", async function () {
+    await nfTropolis.connect(seller).createOffer(tokenId, price);
 
-      const item = await marketplace.idToMarketItem(1);
-      expect(item.tokenId).to.be.equal(tokenId1);
-      expect(item.seller).to.be.equal(user1.address);
-      expect(item.price).to.be.equal(price);
-      expect(item.sold).to.be.false;
+    await nfTropolis.connect(buyer).buyNFT(1, { value: price });
 
-      const balance = await minter.balanceOf(marketplace.address);
-      expect(balance).to.be.equal(1);
-    });
+    const offer = await nfTropolis.getOffer(1);
+    expect(offer[4]).to.be.false;
 
-    it("should not allow non-owners to list NFTs", async function () {
-      const price = ethers.utils.parseEther("1.0");
-      await expect(
-        marketplace.connect(user2).listNFT(price, tokenId1)
-      ).to.be.revertedWith("Sender is not the owner of the token");
-    });
+    const ownerOfToken = await minter.ownerOf(tokenId);
+    expect(ownerOfToken).to.equal(buyer.address);
   });
 
-  describe("delist", function () {
-    it("should delist an NFT from the marketplace", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
+  it("should cancel an offer", async function () {
+    await nfTropolis.connect(seller).createOffer(tokenId, price);
 
-      await marketplace.connect(user1).delist(tokenId1);
+    await nfTropolis.connect(seller).cancelOffer(1);
 
-      const item = await marketplace.idToMarketItem(1);
-      expect(item.tokenId).to.be.equal(0);
-      expect(item.seller).to.be.equal(ethers.constants.AddressZero);
-      expect(item.price).to.be.equal(0);
-      expect(item.sold).to.be.false;
-
-      const balance = await minter.balanceOf(marketplace.address);
-      expect(balance).to.be.equal(0);
-    });
-
-    it("should not allow non-owners to delist NFTs", async function () {
-      await expect(
-        marketplace.connect(user2).delist(tokenId1)
-      ).to.be.revertedWith("Sender is not the owner of the token");
-    });
-
-    it("should not allow delisting a sold NFT", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
-
-      await marketplace.connect(user2).buyNFT(user1.address, user2.address, 1);
-
-      await expect(marketplace.connect(user1).delist(tokenId1)).to.be.revertedWith(
-        "Cannot delist a sold NFT"
-      );
-    });
+    const offer = await nfTropolis.getOffer(1);
+    expect(offer[4]).to.be.false;
   });
 
-  describe("buyNFT", function () {
-    it("should allow a user to buy an NFT from the marketplace", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
+  it("should revert when buying with incorrect payment amount", async function () {
+    await nfTropolis.connect(seller).createOffer(tokenId, price);
 
-      const initialBalance = await ethers.provider.getBalance(user2.address);
-      await marketplace.connect(user2).buyNFT(user1.address, user2.address, 1);
-      const finalBalance = await ethers.provider.getBalance(user2.address);
-
-      const item = await marketplace.idToMarketItem(1);
-      expect(item.sold).to.be.true;
-
-      const hasPurchased = await marketplace.hasPurchased(user2.address, 1);
-      expect(hasPurchased).to.be.true;
-
-      expect(finalBalance.sub(initialBalance)).to.be.equal(price);
-    });
-
-    it("should not allow a user to buy an NFT they have already purchased", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
-
-      await marketplace.connect(user2).buyNFT(user1.address, user2.address, 1);
-
-      await expect(
-        marketplace.connect(user2).buyNFT(user1.address, user2.address, 1)
-      ).to.be.revertedWith("Already bought this NFT");
-    });
-
-    it("should not allow a user to buy an NFT with an incorrect payment amount", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
-
-      await expect(
-        marketplace.connect(user2).buyNFT(user1.address, user2.address, 1, {
-          value: ethers.utils.parseEther("0.5"),
-        })
-      ).to.be.revertedWith("Incorrect payment amount");
-    });
-
-    it("should not allow a user to buy a delisted NFT", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
-
-      await marketplace.connect(user1).delist(tokenId1);
-
-      await expect(
-        marketplace.connect(user2).buyNFT(user1.address, user2.address, 1)
-      ).to.be.revertedWith("Invalid seller");
-    });
+    await expect(nfTropolis.connect(buyer).buyNFT(1, { value: price.div(2) })).to.be.revertedWith(
+      "NFTMarketplace: Incorrect payment amount"
+    );
   });
 
-  describe("getTotalSupply", function () {
-    it("should return the total supply of NFTs in the marketplace", async function () {
-      const totalSupply = await marketplace.getTotalSupply();
-      expect(totalSupply).to.be.equal(0);
+  it("should revert when canceling an offer from another account", async function () {
+    await nfTropolis.connect(seller).createOffer(tokenId, price);
 
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price1 = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price1, tokenId1);
-
-      const newTotalSupply = await marketplace.getTotalSupply();
-      expect(newTotalSupply).to.be.equal(1);
-    });
+    await expect(nfTropolis.connect(buyer).cancelOffer(1)).to.be.revertedWith(
+      "NFTMarketplace: Only the seller can cancel the offer"
+    );
   });
 
-  describe("getTokenURL", function () {
-    it("should return the token URL of an NFT", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price, tokenId1);
-
-      const tokenURL = await marketplace.getTokenURL(tokenId1);
-      expect(tokenURL).to.be.equal("NFT1");
-    });
+  it("should revert when buying from a non-existent offer", async function () {
+    await expect(nfTropolis.connect(buyer).buyNFT(1, { value: price })).to.be.revertedWith(
+      "NFTMarketplace: Offer does not exist or not active"
+    );
   });
 
-  describe("getBalance", function () {
-    it("should return the balance of an address in the marketplace", async function () {
-      const balance = await marketplace.getBalance(user1.address);
-      expect(balance).to.be.equal(0);
-
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price1 = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price1, tokenId1);
-
-      const newBalance = await marketplace.getBalance(user1.address);
-      expect(newBalance).to.be.equal(1);
-    });
-  });
-
-  describe("getAllMarketItems", function () {
-    it("should return an array of all the current market items listed", async function () {
-      await minter.connect(user1).approve(marketplace.address, tokenId1);
-      const price1 = ethers.utils.parseEther("1.0");
-      await marketplace.connect(user1).listNFT(price1, tokenId1);
-
-      await minter.connect(user2).approve(marketplace.address, tokenId2);
-      const price2 = ethers.utils.parseEther("2.0");
-      await marketplace.connect(user2).listNFT(price2, tokenId2);
-
-      const marketItems = await marketplace.getAllMarketItems();
-      expect(marketItems).to.have.lengthOf(2);
-      expect(marketItems[0]).to.be.equal(1);
-      expect(marketItems[1]).to.be.equal(2);
-    });
-  });
+  it("should get the URI of a particular token", async()=>{
+    const URI = await minter.getTokenURI(1);
+    expect(URI).to.be.equal("www.exampleToken.com")
+  })
 });
