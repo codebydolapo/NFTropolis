@@ -3,20 +3,10 @@ import Link from 'next/link'
 import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { saveAccount } from './reducers/action'
-import { marketplaceAddress } from '../src/marketplaceAddress'
-import { minterAddress } from '../src/minterAddress'
-// import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
-// import marketplaceABI from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
-import { saveMarketplaceContract, saveMinterContract, saveAccount } from './reducers/action'
-// import { Marketplace } from '../typechain-types/contracts/Marketplace'
-// import { Minter } from '../typechain-types/contracts/Minter'
-// import { useDisconnect, useAddress, useMetamask } from '@thirdweb-dev/react'
+import { saveAccount } from './reducers/action'
 
 
 function Navbar() {
-
-
 
     const dispatch = useDispatch()
 
@@ -25,25 +15,27 @@ function Navbar() {
     const [__account, setAccount] = useState("")
     // const [network, setNetwork] = useState("")
 
-    const activeNav = "#FFBF00"
-    const inactiveNav = "FFF"
-
     const [connectedStatus, setConnectedStatus] = useState<boolean | undefined>(false)
 
     const account: any = useSelector((state: any) => { state.account })
-    let Window: any;
+    // let Window: any;
 
-
-    useEffect(() => {
-        Window = (window as any).ethereum
-    }, [account])
-
+    
+    
+    // useEffect(() => {
+    //     Window = (window as any).ethereum
+    // }, [account])
+    // let Window = useSelector((state: any | void)=> {state.Window})
+    
     const connect = () => {
-        if (!Window) {
+        Window = (window as any).ethereum
+
+        if (Window == undefined) {
             console.log("please install MetaMask")
             return
         }
-        const provider = new ethers.providers.Web3Provider(Window)
+
+        const provider = new ethers.providers.Web3Provider((Window as any))
 
         setConnectedStatus(true)
 
@@ -53,32 +45,11 @@ function Navbar() {
                     // setCurrentAccount(accounts[0])
                     console.log(accounts[0])
                     dispatch(saveAccount(accounts[0]))
-                    localStorage.setItem("_account", accounts[0])
                 }
                 setAccount(accounts[0])
             })
             .catch((e) => console.log(e))
     }
-
-    const disconnect = () => {
-        console.log("onClickDisConnect")
-        // setBalance(undefined)
-        // setCurrentAccount(undefined)
-        // dispatch(saveAccount(''))
-        setAccount('')
-        setConnectedStatus(false)
-        localStorage.setItem("_account", "")
-    }
-
-    function handleConnection() {
-        if (!connectedStatus) {
-            connect()
-        }
-        else {
-            disconnect()
-        }
-    }
-
 
 
     function connectMetamask() {
@@ -103,8 +74,8 @@ function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className={`w-[45%] h-full flex md:justify-center xs:justify-end`}>
-                <div className={`md:w-[75%] h-full flex justify-between xs:w-0`}>
+            <div className={`w-[45%] h-full flex lg:justify-center xs:justify-end`}>
+                <div className={`md:w-[75%] h-full lg:flex justify-between xs:w-0 xs:hidden`}>
                     <Link href='/'>
                         <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
                             <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>Home</h1>
@@ -122,13 +93,13 @@ function Navbar() {
                         <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
                     </div> */}
                 </div>
-                <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-full justify-center items-center `}>
+                <div className={`lg:w-[25%] h-full flex md:mx-0 xs:mx-2 md:w-[40%] xs:w-[70%] justify-center items-center `}>
                     {__account ?
                         <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`}>
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${__account.slice(0, 6)}...${__account.slice(38, 42)}`}</h1>
                         </div>
                         :
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={handleConnection}>
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1da1f2] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connect}>
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
                         </div>
                     }

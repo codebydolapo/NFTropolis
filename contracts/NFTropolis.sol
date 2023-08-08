@@ -1,136 +1,125 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: GPL-3.0
 
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+pragma solidity >=0.7.0 <0.9.0;
+
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NFTropolis is IERC721Receiver, Ownable {
-    using Counters for Counters.Counter;
+contract NFTropolis is ERC721Enumerable, Ownable {
+  using Strings for uint256;
 
-    Counters.Counter private _offerIds;
+  string public baseURI;
+  // string public baseExtension = ".json";
+  uint256 public cost = 0.0001 ether;
+  bool public paused = false;
+  mapping(address => uint256) public addressMintedBalance;
+  uint256[] sold;
+  mapping(uint256 => bool) private NFTOwned;
 
-    struct Offer {
-        uint256 offerId;
-        uint256 tokenId;
-        address payable seller;
-        uint256 price;
-        bool active;
+  constructor(
+    string memory _name,
+    string memory _symbol,
+    string memory _initBaseURI
+  ) ERC721(_name, _symbol) {
+    setBaseURI(_initBaseURI);
+  }
+
+  // internal
+  function _baseURI() internal view virtual override returns (string memory) {
+    return baseURI;
+  }
+
+  // public
+  function mint(uint256 _mintAmount) public payable {
+    require(!paused, "the contract is paused");
+    uint256 supply = totalSupply();
+    require(_mintAmount > 0, "need to mint at least 1 NFT");
+    if (msg.sender != owner()) {
+        require(msg.value >= cost * _mintAmount, "insufficient funds");
     }
 
-    mapping(uint256 => Offer) private _offers;
-    mapping(address => mapping(uint256 => uint256)) private _sellerToTokenOffers;
+    for (uint256 i = 1; i <= _mintAmount; i++) {
+      addressMintedBalance[msg.sender]++;
+      _safeMint(msg.sender, supply + i);
+      NFTOwned[supply + i] = false;
+    }
+  }
+  
 
-    IERC721 private _nftContract;
+  function walletOfOwner(address _owner)
+    public
+    view
+    returns (uint256[] memory)
+  {
+    uint256 ownerTokenCount = balanceOf(_owner);
+    uint256[] memory tokenIds = new uint256[](ownerTokenCount);
+    for (uint256 i; i < ownerTokenCount; i++) {
+      tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
+    }
+    return tokenIds;
+  }
 
-    event OfferCreated(
-        uint256 offerId,
-        uint256 tokenId,
-        address seller,
-        uint256 price
+  function tokenURI(uint256 tokenId)
+    public
+    view
+    virtual
+    override
+    returns (string memory)
+  {
+    require(
+      _exists(tokenId),
+      "ERC721Metadata: URI query for nonexistent token"
     );
+    
+    string memory currentBaseURI = _baseURI();
+    return bytes(currentBaseURI).length > 0
+        // ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
+        ? string(abi.encodePacked(currentBaseURI, tokenId.toString()))
+        : "";
+  }
+  
+  function setCost(uint256 _newCost) public onlyOwner {
+    cost = _newCost;
+  }
 
-    event OfferCancelled(uint256 offerId);
+  function setBaseURI(string memory _newBaseURI) public onlyOwner {
+    baseURI = _newBaseURI;
+  }
 
-    event NFTBought(uint256 offerId, uint256 tokenId, address buyer);
+  // function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+  //   baseExtension = _newBaseExtension;
+  // }
+  
+  function pause(bool _state) public onlyOwner {
+    paused = _state;
+  }
+  
+  function withdraw() public payable onlyOwner {
+    // This will pay me (the owner) the contract balance.
+    (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+    require(os);
+  }
 
-    constructor(address nftContractAddress) {
-        require(
-            nftContractAddress != address(0),
-            "NFTMarketplace: Invalid NFT contract address"
-        );
-        _nftContract = IERC721(nftContractAddress);
-    }
+  function buyNFT(uint256 _tokenId)public payable{
+    require(msg.value >= cost, "Insufficient funds");
+    require(!NFTOwned[_tokenId], "Token already sold");
 
-    function createOffer(uint256 tokenId, uint256 price) external {
-        require(
-            _nftContract.ownerOf(tokenId) == msg.sender,
-            "NFTMarketplace: Sender is not the owner of the token"
-        );
-        require(price > 0, "NFTMarketplace: Price must be greater than zero");
+    // Transfer the NFT to the buyer
+    // setApprovalForAll(msg.sender, true);
+    _transfer(ownerOf(_tokenId), msg.sender, _tokenId);
 
-        _offerIds.increment();
-        uint256 offerId = _offerIds.current();
-        _offers[offerId] = Offer({
-            offerId: offerId,
-            tokenId: tokenId,
-            seller: payable(msg.sender),
-            price: price,
-            active: true
-        });
-        _sellerToTokenOffers[msg.sender][tokenId] = offerId;
 
-        emit OfferCreated(offerId, tokenId, msg.sender, price);
-    }
+    // Mark the token as owned
+    NFTOwned[_tokenId] = true;
+    sold.push(_tokenId);
 
-    function cancelOffer(uint256 offerId) external {
-        Offer storage offer = _offers[offerId];
-        require(
-            offer.active,
-            "NFTMarketplace: Offer does not exist or not active"
-        );
-        require(
-            offer.seller == msg.sender,
-            "NFTMarketplace: Only the seller can cancel the offer"
-        );
+    // Transfer the funds to the contract owner
+    (bool success, ) = payable(owner()).call{value: msg.value}("");
+    require(success, "Transfer failed");
+  }
 
-        delete _sellerToTokenOffers[offer.seller][offer.tokenId];
-        delete _offers[offerId];
+  function isOwned(uint256 _tokenId) public view returns (bool){
+    return NFTOwned[_tokenId];
+  }
 
-        emit OfferCancelled(offerId);
-    }
-
-    function buyNFT(uint256 offerId) external payable {
-        Offer storage offer = _offers[offerId];
-        require(
-            offer.active,
-            "NFTMarketplace: Offer does not exist or not active"
-        );
-        require(
-            msg.value == offer.price,
-            "NFTMarketplace: Incorrect payment amount"
-        );
-
-        _nftContract.safeTransferFrom(
-            offer.seller,
-            msg.sender,
-            offer.tokenId
-        );
-
-        delete _sellerToTokenOffers[offer.seller][offer.tokenId];
-        delete _offers[offerId];
-
-        emit NFTBought(offerId, offer.tokenId, msg.sender);
-    }
-
-    function getOffer(uint256 offerId)
-        external
-        view
-        returns (
-            uint256,
-            uint256,
-            address,
-            uint256,
-            bool
-        )
-    {
-        Offer storage offer = _offers[offerId];
-        return (
-            offer.offerId,
-            offer.tokenId,
-            offer.seller,
-            offer.price,
-            offer.active
-        );
-    }
-
-    function onERC721Received(
-        address,
-        address,
-        uint256,
-        bytes calldata
-    ) external pure override returns (bytes4) {
-        return IERC721Receiver.onERC721Received.selector;
-    }
 }

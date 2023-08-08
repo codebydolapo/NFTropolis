@@ -17,7 +17,7 @@ function Landing() {
     return (
         <div className={`w-full h-[100vh] ${styles.landing}`}>
             <div className={`w-full h-full flex flex-col ${styles.backdrop}`}>
-                <MarketplaceBody/>
+                <MarketplaceBody />
             </div>
         </div>
     )

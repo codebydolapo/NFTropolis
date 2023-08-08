@@ -1,4 +1,4 @@
-import minterABI from '../artifacts/contracts/minter.sol/minter.json'
+import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
 import { minterAddress } from '../src/minterAddress'
 
 function minter(Window: any) {

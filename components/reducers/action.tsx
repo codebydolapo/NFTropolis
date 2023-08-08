@@ -34,12 +34,6 @@ export const saveMarketplaceContract = (contractInstance: undefined | any)=>{
     }
 }
 
-export const saveMinterContract = (contractInstance: undefined | any)=>{
-    return{
-        type: "SAVE_MINTER_CONTRACT",
-        contractInstance
-    }
-}
 
 export const activateCheckoutPopup = ()=>{
     return{
@@ -50,5 +44,19 @@ export const activateCheckoutPopup = ()=>{
 export const deactivateCheckoutPopup = ()=>{
     return{
         type: "DEACTIVATE_POPUP"
+    }
+}
+
+export const saveNFTData = (data: any)=>{
+    return {
+        type: "SAVE_DATA",
+        data
+    }
+}
+
+export const saveWindow = (Window: any)=>{
+    return{
+        type: "SAVE_WINDOW",
+        Window
     }
 }

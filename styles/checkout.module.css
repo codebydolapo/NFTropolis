@@ -1,9 +1,16 @@
-.checkout{
-    /* position: absolute; */
-    box-shadow: 1px 1px 10px black;
+.checkout {
+  /* position: absolute; */
+  box-shadow: 1px 1px 10px black;
 }
 
-.checkoutDetails::-webkit-scrollbar{
-    display: none
+.checkoutDetails::-webkit-scrollbar {
+  display: none;
 }
 
+.image {
+  transition: all ease 500ms;
+}
+
+.image:hover {
+  transform: scale(1.1);
+}

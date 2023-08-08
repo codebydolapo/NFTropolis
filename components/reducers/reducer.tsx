@@ -24,15 +24,6 @@ export const itemData  = (state = {}, action: Actions)=>{
     }
 }
 
-export const category = (state = '', action: {type: string, category: string})=>{
-    switch(action.type){
-        case "SET_CATEGORY":
-            return state = action.category
-        default:
-            return state
-    }
-}
-
 export const account = (state = "", action: {type: string, account: any} )=>{
     switch(action.type){
         case "SAVE_ACCOUNT":
@@ -43,18 +34,9 @@ export const account = (state = "", action: {type: string, account: any} )=>{
 }
 
 export const marketplaceContract= (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
-    console.log(action.contractInstance)
+    // console.log(action.contractInstance)
     switch(action.type){
         case "SAVE_MARKETPLACE_CONTRACT":
-            return state = action.contractInstance;
-        default:
-            return state
-    }
-}
-
-export const minterContract = (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
-    switch(action.type){
-        case "SAVE_MINTER_CONTRACT":
             return state = action.contractInstance;
         default:
             return state
@@ -72,11 +54,30 @@ export const checkoutPopupState = (state = false, action: {type: string}) =>{
     }
 }
 
+export const NFTData = (state = [], action: {data: any[], type: string})=>{
+        
+    switch(action.type){
+        case "SAVE_DATA":
+            return action.data
+        default:
+            return state
+    }
+}
+
+export const Window = (state = null, action: {Window: any, type: string})=>{
+    switch (action.type){
+        case "SAVE_WINDOW":
+            return action.Window;
+        default:
+            return state
+    }
+}
+
 export const allReducers = combineReducers({
     itemData,
-    category,
     account,
     marketplaceContract,
-    minterContract,
-    checkoutPopupState
+    checkoutPopupState,
+    NFTData,
+    Window
 })

@@ -1,63 +1,31 @@
 import styles from '../styles/collectionsbody.module.css'
-import { StarIcon, ShareIcon, DotsHorizontalIcon } from '@heroicons/react/solid'
-import { GlobeAltIcon } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 import NFTCard from './NFTCard';
 import Checkout from './Checkout';
-import { useDispatch } from 'react-redux';
-// import { marketplaceContract } from './reducers/reducer';
-// import { useState } from 'react';
-import fs from "fs";
-import metadata from '../data/data.json'
+
 
 
 function MarketplaceBody() {
 
-    let randomNumber;
-
-    interface Props {
-        name: string,
-        description: string,
-        image: string,
-        price: string,
-        index: number
-    }
+    const [NFTs, setNFTs] = useState([])
 
 
-    const [NFTs, setNFTs] = useState(metadata)
-
-
-    const category = useSelector((state: any) => { return state.category })
     const account = useSelector((state: { account: string }) => { return state.account })
     const checkoutPopupState = useSelector((state: { checkoutPopupState: boolean }) => { return state.checkoutPopupState })
 
-    // useEffect(() => {
-    //     if (account) {
-    //         // for(let i = 0; i < 46; i++){
-    //         //     marketplace.getTokenURL(i)
-    //         //         .then((data: any) => {
-    //         //             arr.push(data)
-    //         //             // console.log(data)
-    //         //         })
-    //         // }
-    //         // console.log(arr)
-    //         // console.log("hello")
+    const NFTData = useSelector((state: any) => state.NFTData)
 
-    //         // let architecture: Props[], digitalArt: any, nature: any, space: any
-    //         category == "architecture" ? setNFTs(architecture) :
-    //             category == "digitalart" ? setNFTs(digitalArt) :
-    //                 category == "nature" ? setNFTs(nature) :
-    //                     category == "space" ? setNFTs(space) : null
-    //     }
+//   console.log(NFTData)
 
-    //     // }
-    // }, [account]);
-
+  useEffect(()=>{
+    setNFTs(NFTData)
+  }, [NFTData])
 
 
     return (
-        <>{
+        <>
+        {
             account || true ?
                 <div className={`w-full min-h-[100vh] h-auto flex flex-col items-center`}>
 
@@ -107,7 +75,7 @@ function MarketplaceBody() {
 
                         <div className={`w-full min-h-[70vh] h-auto flex`}>
                             <div className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around md:px-5 xs:w-[100%] relative ${styles.itemsContainer}`}>
-                                {!checkoutPopupState && NFTs.map(({ description, image, name, value, index, price }: any) => {
+                                {!checkoutPopupState && NFTs.map(({ description, image, name, value, index, price, isOwned }: any) => {
                                     return <NFTCard
                                         description={description}
                                         image={image}
@@ -115,6 +83,7 @@ function MarketplaceBody() {
                                         key={index}
                                         index={index}
                                         price={price}
+                                        isOwned = {isOwned}
                                     />
                                 })}
                                 {checkoutPopupState && <Checkout />}
