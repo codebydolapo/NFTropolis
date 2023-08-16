@@ -25,7 +25,7 @@ module.exports = {
   mumbai: {
     chainId: "",
     url: process.env.URL,
-    accounts: [process.env.ACCOUNT]
+    accounts: [process.env.MUMBAI_PRIVATE_KEY]
   },
   solidity: {
     compilers: [
@@ -48,5 +48,8 @@ module.exports = {
     tests: "./test",
     cache: "./cache",
     artifacts: "./artifacts",
+  },
+  etherscan: {
+    apiKey: "ABCDE12345ABCDE12345ABCDE123456789",
   },
 }

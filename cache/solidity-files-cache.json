@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/contracts/Minter.sol": {
-      "lastModificationDate": 1690588557481,
-      "contentHash": "e8063a8462122f74c25982612143568a",
-      "sourceName": "contracts/Minter.sol",
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/contracts/Marketplace.sol": {
+      "lastModificationDate": 1692125590992,
+      "contentHash": "f5386af24fbef3005971d1bc1b282f6f",
+      "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
@@ -29,20 +29,56 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "@openzeppelin/contracts/utils/Counters.sol"
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "Marketplace"
+      ]
+    },
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1690589496574,
+      "contentHash": "48de4c9a3a4ae5ef66a2aa620843413f",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "Minter"
+        "IERC721"
       ]
     },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1690589478547,
-      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
-      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1690589496582,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
@@ -71,7 +107,44 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "Counters"
+        "IERC165"
+      ]
+    },
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1690589508622,
+      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
       ]
     },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
@@ -117,41 +190,6 @@
         "ERC721"
       ]
     },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1690589478443,
-      "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.1"
-      ],
-      "artifacts": [
-        "Address"
-      ]
-    },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/Context.sol": {
       "lastModificationDate": 1690589478443,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
@@ -185,6 +223,41 @@
       ],
       "artifacts": [
         "Context"
+      ]
+    },
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1690589478443,
+      "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.1"
+      ],
+      "artifacts": [
+        "Address"
       ]
     },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
@@ -262,43 +335,6 @@
         "ERC165"
       ]
     },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1690589496574,
-      "contentHash": "48de4c9a3a4ae5ef66a2aa620843413f",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721"
-      ]
-    },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
       "lastModificationDate": 1690589496574,
       "contentHash": "c22d4395e33763de693fd440c6fd10e1",
@@ -332,43 +368,6 @@
       ],
       "artifacts": [
         "IERC721Receiver"
-      ]
-    },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1690589508622,
-      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Metadata"
       ]
     },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
@@ -441,10 +440,10 @@
         "SignedMath"
       ]
     },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1690589496582,
-      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1690589478371,
+      "contentHash": "5a20b2cad87ddb61c7a3a6af21289e28",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
@@ -468,12 +467,52 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "../utils/Context.sol"
+      ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC165"
+        "Ownable"
+      ]
+    },
+    "/home/dolapo/Desktop/nftropolis/NFTropolis/contracts/NFTropolis.sol": {
+      "lastModificationDate": 1692121305236,
+      "contentHash": "72fec13f8a7a2d38da64137a2128dd32",
+      "sourceName": "contracts/NFTropolis.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "NFTropolis"
       ]
     },
     "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
@@ -549,81 +588,6 @@
       ],
       "artifacts": [
         "IERC721Enumerable"
-      ]
-    },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/contracts/NFTropolis.sol": {
-      "lastModificationDate": 1691478152431,
-      "contentHash": "e2751d33b8d14e35a79ceccb99d4bd03",
-      "sourceName": "contracts/NFTropolis.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        ">=0.7.0 <0.9.0"
-      ],
-      "artifacts": [
-        "NFTropolis"
-      ]
-    },
-    "/home/dolapo/Desktop/nftropolis/NFTropolis/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1690589478371,
-      "contentHash": "5a20b2cad87ddb61c7a3a6af21289e28",
-      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Ownable"
       ]
     }
   }

@@ -24,7 +24,7 @@ export type { ERC165 } from "./@openzeppelin/contracts/utils/introspection/ERC16
 export { ERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/ERC165__factory";
 export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC165";
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
-export type { Minter } from "./contracts/Minter";
-export { Minter__factory } from "./factories/contracts/Minter__factory";
+export type { Marketplace } from "./contracts/Marketplace";
+export { Marketplace__factory } from "./factories/contracts/Marketplace__factory";
 export type { NFTropolis } from "./contracts/NFTropolis";
 export { NFTropolis__factory } from "./factories/contracts/NFTropolis__factory";
