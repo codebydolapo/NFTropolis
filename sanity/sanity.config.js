@@ -5,9 +5,9 @@ import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'millow-backend',
+  title: 'nftropolis',
 
-  projectId: 'zpwvjwqc',
+  projectId: 'vh6m6uma',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],

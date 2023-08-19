@@ -1,8 +1,10 @@
 import {defineField, defineType} from 'sanity'
+import blockContent from "./blockContent"
+
 
 export default defineType({
-  name: 'author',
-  title: 'Author',
+  name: 'nft',
+  title: 'NFT',
   type: 'document',
   fields: [
     defineField({
@@ -11,13 +13,21 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
+      name: 'url',
+      title: 'Url',
       type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
+      // options: {
+      //   source: 'name',
+      //   maxLength: 96,
+      // },
+    }),
+    defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      // options: {
+      //   hotspot: true,
+      // },
     }),
     defineField({
       name: 'image',
@@ -28,17 +38,9 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'bio',
-      title: 'Bio',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
-          lists: [],
-        },
-      ],
+      name: 'description',
+      title: 'Description',
+      type: 'blockContent',
     }),
   ],
   preview: {
