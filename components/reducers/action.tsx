@@ -1,12 +1,12 @@
 interface Item{
     name: string,
     description: string,
-    image: string,
+    image: string | void,
     index: string,
     price: string
 }
 
-export const addItem = (item: Item | null | undefined)=>{
+export const addItem = (item: Metadata)=>{
     return{
         type: "SET_ITEM",
         item
@@ -47,7 +47,7 @@ export const deactivateCheckoutPopup = ()=>{
     }
 }
 
-export const saveNFTData = (data: any)=>{
+export const saveNFTData = (data: Metadata)=>{
     return {
         type: "SAVE_DATA",
         data

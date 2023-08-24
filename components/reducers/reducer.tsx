@@ -7,7 +7,7 @@ interface Actions{
     item: {
         name: string,
         description: string,
-        image: string,
+        image: string | void,
         index: string,
         price: string
     }
@@ -54,7 +54,7 @@ export const checkoutPopupState = (state = false, action: {type: string}) =>{
     }
 }
 
-export const NFTData = (state = [], action: {data: any[], type: string})=>{
+export const NFTData = (state = [], action: {data: Metadata, type: string})=>{
         
     switch(action.type){
         case "SAVE_DATA":

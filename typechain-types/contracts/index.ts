@@ -3,3 +3,4 @@
 /* eslint-disable */
 export type { Marketplace } from "./Marketplace";
 export type { NFTropolis } from "./NFTropolis";
+export type { RandomNFT } from "./RandomNFT";

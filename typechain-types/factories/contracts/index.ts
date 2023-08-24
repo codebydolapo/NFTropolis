@@ -3,3 +3,4 @@
 /* eslint-disable */
 export { Marketplace__factory } from "./Marketplace__factory";
 export { NFTropolis__factory } from "./NFTropolis__factory";
+export { RandomNFT__factory } from "./RandomNFT__factory";

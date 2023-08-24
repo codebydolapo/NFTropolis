@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 import NFTCard from './NFTCard';
 import Checkout from './Checkout';
+import { urlFor } from '../sanity/sanity.config';
+
+
 
 
 
@@ -75,15 +78,14 @@ function MarketplaceBody() {
 
                         <div className={`w-full min-h-[70vh] h-auto flex`}>
                             <div className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around md:px-5 xs:w-[100%] relative ${styles.itemsContainer}`}>
-                                {!checkoutPopupState && NFTs.map(({ description, image, name, value, index, price, isOwned }: any) => {
+                                {!checkoutPopupState && NFTs.map(({ description, image, name, price,}: Metadata ) => {
                                     return <NFTCard
-                                        description={description}
-                                        image={image}
+                                        description={description?.children.text}
+                                        image={urlFor(image?.asset._ref)}
                                         name={name}
-                                        key={index}
-                                        index={index}
+                                        key={image}
+                                        // index={index}
                                         price={price}
-                                        isOwned = {isOwned}
                                     />
                                 })}
                                 {checkoutPopupState && <Checkout />}

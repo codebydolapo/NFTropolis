@@ -3,8 +3,8 @@ import blockContent from "./blockContent"
 
 
 export default defineType({
-  name: 'nft',
-  title: 'NFT',
+  name: 'mintedNFTs',
+  title: 'Minted NFTs',
   type: 'document',
   fields: [
     defineField({
@@ -21,14 +21,14 @@ export default defineType({
       //   maxLength: 96,
       // },
     }),
-    defineField({
-      name: 'price',
-      title: 'Price (MATIC)',
-      type: 'number',
-      // options: {
-      //   hotspot: true,
-      // },
-    }),
+    // defineField({
+    //   name: 'price',
+    //   title: 'Price (MATIC)',
+    //   type: 'number',
+    //   // options: {
+    //   //   hotspot: true,
+    //   // },
+    // }),
     defineField({
       name: 'image',
       title: 'Image',
@@ -42,6 +42,15 @@ export default defineType({
       title: 'Description',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'tokenId',
+      title: 'Token Id',
+      type: 'number',
+      // options: {
+      //   hotspot: true,
+      // },
+    }),
+
   ],
   preview: {
     select: {
@@ -49,4 +58,5 @@ export default defineType({
       media: 'image',
     },
   },
+  
 })

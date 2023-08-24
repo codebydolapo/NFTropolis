@@ -9,20 +9,22 @@ import { saveMarketplaceContract } from "../components/reducers/action";
 import { useDispatch, useSelector } from "react-redux";
 import { nfTropolisAddress } from "../src/nfTropolisAddress";
 import nfTropolisABI from "../artifacts/contracts/NFTropolis.sol/NFTropolis.json";
-import minterABI from "../artifacts/contracts/Minter.sol/Minter.json";
+// import minterABI from "../artifacts/contracts/Minter.sol/Minter.json";
 // import { minterAddress } from '../src/minterAddress'
 import metadata from "../data/data.json";
 import { saveNFTData, saveWindow } from "../components/reducers/action";
+import { client } from "../sanity/sanity.config";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ nfts }: any) => {
   const [_effectState, setEffectState] = useState(true);
   let Window: any;
   const dispatch = useDispatch();
 
-  let dataArray: any[] = [];
+  // let dataArray: any[] = [];
 
   useEffect(() => {
     Window = (window as any).ethereum;
+    console.log(nfts);
   }, []);
 
   const startUp = async () => {
@@ -50,20 +52,19 @@ const Home: NextPage = () => {
 
     console.log(nfTropolis);
 
-    for (let i = 1; i <= metadata.length; i++) {
-      if (_effectState) {
-        const response = await nfTropolis.tokenURI(i);
-        const rawData = await fetch(response);
-        const data: any = await rawData.json();
-        const isOwned = await nfTropolis.isOwned(i);
-        data.isOwned = isOwned;
-        // console.log(isOwned)
-        dataArray.push(data);
-      }
-    }
+    // for (let i = 1; i <= metadata.length; i++) {
+    //   if (_effectState) {
+    //     const response = await nfTropolis.tokenURI(i);
+    //     const rawData = await fetch(response);
+    //     const data: any = await rawData.json();
+    //     const isOwned = await nfTropolis.isOwned(i);
+    //     data.isOwned = isOwned;
+    //     dataArray.push(data);
+    //   }
+    // }
 
-    dispatch(saveNFTData([]));
-    dispatch(saveNFTData(dataArray));
+    dispatch(saveNFTData(nfts));
+    dispatch(saveNFTData(nfts));
     dispatch(saveMarketplaceContract(nfTropolis));
 
     setEffectState(false);
@@ -92,3 +93,40 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const propertyQuery = `*[_type == "mintedNFTs"][]{
+    image,
+    url{
+    current
+    },
+  name,
+    description[0]{
+    children[0]{
+      text
+    }
+    },
+  price
+  }`;
+
+  //`https://zpwvjwqc.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%20%3D%3D%20%22property%22%5D%5B${"tokenId"}%5D`
+
+  const nfts: Metadata | undefined = await client.fetch(propertyQuery);
+
+  const metadata = {
+    name: nfts?.name,
+    image: nfts?.image,
+    description: nfts?.description,
+    external_url: nfts?.external_url
+  };
+
+  return {
+    props: {
+      nfts,
+      name: nfts?.name,
+      image: nfts?.image,
+      description: nfts?.description,
+    },
+  };
+}
+//https://nftstorage.link/ipfs/bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy/amazing.gif

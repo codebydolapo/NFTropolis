@@ -1,8 +1,7 @@
 import { expect, ethers } from "./index";
 
 describe("Nft marketplace Unit Tests", function () {
-  let nftmarketplace: any,
-    marketplace: any,
+  let marketplace: any,
     nfTropolis: any,
     owner: any,
     customer: any,
@@ -27,7 +26,7 @@ describe("Nft marketplace Unit Tests", function () {
 
     const txReceipt = await nfTropolis
       .connect(customer)
-      .mintNFT(customer.address, { value: PRICE });
+      .mintNFT({ value: PRICE });
     await nfTropolis
       .connect(customer)
       .setApprovalForAll(marketplace.address, true);
@@ -52,7 +51,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer)
           .listItem(nfTropolis.address, TOKEN_ID, PRICE)
-      ).to.be.revertedWith("NFT Already Listed");
+      ).to.be.revertedWith("Already_Listed");
     });
 
     it("exclusively allows owners to list", async function () {
@@ -62,7 +61,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer2)
           .listItem(nfTropolis.address, TOKEN_ID, PRICE)
-      ).to.be.revertedWith("msg.sender is not the owner");
+      ).to.be.revertedWith("Caller_Isnt_Owner");
     });
 
     // it("needs approvals to list item", async function () {
@@ -90,7 +89,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer)
           .listItem(nfTropolis.address, TOKEN_ID, ZERO_PRICE)
-      ).revertedWith("Price should be greater than zero");
+      ).revertedWith("Listing_Price_Too_Low");
     });
   });
   describe("cancelListing", function () {
@@ -99,7 +98,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer)
           .cancelListing(nfTropolis.address, TOKEN_ID)
-      ).to.be.revertedWith("nft is not listed");
+      ).to.be.revertedWith("Not_Listed");
     });
 
     it("reverts if anyone but the owner tries to call", async function () {
@@ -111,7 +110,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer2)
           .cancelListing(nfTropolis.address, TOKEN_ID)
-      ).to.be.revertedWith("msg.sender is not the owner");
+      ).to.be.revertedWith("Caller_Isnt_Owner");
     });
 
     it("emits event and removes listing", async function () {
@@ -135,16 +134,18 @@ describe("Nft marketplace Unit Tests", function () {
     it("reverts if the item isnt listed", async function () {
       await expect(
         marketplace.connect(customer2).buyItem(nfTropolis.address, TOKEN_ID)
-      ).to.be.revertedWith("nft is not listed");
+      ).to.be.revertedWith("Not_Listed");
     });
+
     it("reverts if the price isnt met", async function () {
       await marketplace
         .connect(customer)
         .listItem(nfTropolis.address, TOKEN_ID, PRICE);
       await expect(
         marketplace.connect(customer).buyItem(nfTropolis.address, TOKEN_ID)
-      ).to.be.revertedWith("insufficient funds");
+      ).to.be.revertedWith("Insufficient_Funds");
     });
+    
     it("transfers the nft to the buyer and updates internal proceeds record", async function () {
       await marketplace
         .connect(customer)
@@ -166,7 +167,7 @@ describe("Nft marketplace Unit Tests", function () {
     it("must be owner and listed", async function () {
       await expect(
         marketplace.updateListing(nfTropolis.address, TOKEN_ID, PRICE)
-      ).to.be.revertedWith("nft is not listed");
+      ).to.be.revertedWith("Not_Listed");
       await marketplace
         .connect(customer)
         .listItem(nfTropolis.address, TOKEN_ID, PRICE);
@@ -174,7 +175,7 @@ describe("Nft marketplace Unit Tests", function () {
         marketplace
           .connect(customer2)
           .updateListing(nfTropolis.address, TOKEN_ID, PRICE)
-      ).to.be.revertedWith("msg.sender is not the owner");
+      ).to.be.revertedWith("Caller_Isnt_Owner");
     });
 
     it("updates the price of the item", async function () {

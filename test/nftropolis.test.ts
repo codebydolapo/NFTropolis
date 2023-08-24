@@ -18,7 +18,7 @@ describe("NFTropolis", function () {
 
   it("should mint a new NFT for the caller if they have enough funds", async () => {
     // Mint an NFT for the first account
-    await nfTropolis.connect(owner).mintNFT(owner.address);
+    await nfTropolis.connect(owner).mintNFT();
 
     const _count = await nfTropolis.getMintedTokenCount();
     const count = Number(_count)
@@ -35,7 +35,7 @@ describe("NFTropolis", function () {
   it("should not mint a new NFT for the caller if they do not have enough funds", async () => {
 
     // Try to mint an NFT for the first account
-   await expect(nfTropolis.connect(customer).mintNFT(customer.address, {value: ethers.utils.parseEther("0.5")})).to.be.revertedWith("insufficient funds");
+   await expect(nfTropolis.connect(customer).mintNFT({value: ethers.utils.parseEther("0.5")})).to.be.revertedWith("Insufficient_Funds");
 
     // The caller should still have zero NFTs
     const tokenIds = await nfTropolis.balanceOf(customer.address);
@@ -45,7 +45,7 @@ describe("NFTropolis", function () {
 
   it("should return the correct concatTokenURI", async () => {
     // Mint an NFT for the first account
-    await nfTropolis.connect(owner).mintNFT(owner.address);
+    await nfTropolis.connect(owner).mintNFT();
 
     const _count = await nfTropolis.getMintedTokenCount();
     const count = Number(_count)

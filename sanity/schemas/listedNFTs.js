@@ -3,8 +3,8 @@ import blockContent from "./blockContent"
 
 
 export default defineType({
-  name: 'nft',
-  title: 'NFT',
+  name: 'listedNFTs',
+  title: 'Listed NFTs',
   type: 'document',
   fields: [
     defineField({
@@ -41,6 +41,24 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'contractAddress',
+      title: 'ContractAddress',
+      type: 'string',
+    }),
+    defineField({
+      name: 'tokenId',
+      title: 'Token Id',
+      type: 'number',
+      // options: {
+      //   hotspot: true,
+      // },
+    }),
+    defineField({
+      name: 'minter',
+      title: 'Minter',
+      type: 'string',
     }),
   ],
   preview: {

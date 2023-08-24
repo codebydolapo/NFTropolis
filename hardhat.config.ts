@@ -23,7 +23,7 @@ module.exports = {
     },
   },
   mumbai: {
-    chainId: "",
+    chainId: "80001",
     url: process.env.URL,
     accounts: [process.env.MUMBAI_PRIVATE_KEY]
   },

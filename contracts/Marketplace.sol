@@ -4,6 +4,11 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
+/**
+ * @title Marketplace
+ * @dev A smart contract for listing, buying, and managing NFTs in a marketplace.
+ */
+
 contract Marketplace {
   struct Listing {
     uint256 price;
@@ -37,15 +42,18 @@ contract Marketplace {
 
   event ListingCancelled(address indexed _nftAddress, uint256 indexed _tokenId);
 
-  modifier Already_Listed(
-    address _nftAddress,
-    uint256 _tokenId
-  ) {
+  /**
+   * @dev Modifier that checks whether an NFT is already listed.
+   */
+  modifier Already_Listed(address _nftAddress, uint256 _tokenId) {
     Listing memory listing = listings[_nftAddress][_tokenId];
-    require(listing.price == 0, "NFT Already Listed");
+    require(listing.price == 0, "Already_Listed");
     _;
   }
 
+  /**
+   * @dev Modifier that checks whether the caller is the owner of an NFT.
+   */
   modifier isOwner(
     address _nftAddress,
     uint256 _tokenId,
@@ -53,19 +61,28 @@ contract Marketplace {
   ) {
     IERC721 nft = IERC721(_nftAddress);
     address owner = nft.ownerOf(_tokenId);
-    require(owner == spender, "msg.sender is not the owner");
+    require(owner == spender, "Caller_Isnt_Owner");
     _;
   }
 
+  /**
+   * @dev Modifier that checks whether an NFT is listed.
+   */
   modifier Is_Listed(address _nftAddress, uint256 _tokenId) {
     // IERC721 nft = IERC721(_nftAddress);
     Listing memory listing = listings[_nftAddress][_tokenId];
-    require(listing.price > 0, "nft is not listed");
+    require(listing.price > 0, "Not_Listed");
     _;
   }
 
+  /**
+   * @dev Constructor to initialize the Marketplace contract.
+   */
   constructor() {}
 
+  /**
+   * @dev Lists an NFT for sale in the marketplace.
+   */
   function listItem(
     address _nftAddress,
     uint256 _tokenId,
@@ -75,7 +92,7 @@ contract Marketplace {
     Already_Listed(_nftAddress, _tokenId)
     isOwner(_nftAddress, _tokenId, msg.sender)
   {
-    require(_price > 0, "Price should be greater than zero");
+    require(_price > 0, "Listing_Price_Too_Low");
 
     IERC721 nft = IERC721(_nftAddress);
 
@@ -88,6 +105,9 @@ contract Marketplace {
     emit ItemListed(msg.sender, _nftAddress, _tokenId, _price);
   }
 
+  /**
+   * @dev Buys an NFT listed in the marketplace.
+   */
   function buyItem(
     address _nftAddress,
     uint256 _tokenId
@@ -95,10 +115,10 @@ contract Marketplace {
     external
     payable
     Is_Listed(_nftAddress, _tokenId)
-    // isOwner(_nftAddress, _tokenId, msg.sender)
+  // isOwner(_nftAddress, _tokenId, msg.sender)
   {
     Listing memory listing = listings[_nftAddress][_tokenId];
-    require(msg.value >= listing.price, "insufficient funds");
+    require(msg.value >= listing.price, "Insufficient_Funds");
 
     proceeds[listing.seller] += msg.value;
     delete listing;
@@ -108,6 +128,9 @@ contract Marketplace {
     emit ItemBought(msg.sender, _nftAddress, _tokenId, listing.price);
   }
 
+  /**
+   * @dev Cancels a listing in the marketplace.
+   */
   function cancelListing(
     address _nftAddress,
     uint256 _tokenId
@@ -120,6 +143,9 @@ contract Marketplace {
     emit ListingCancelled(_nftAddress, _tokenId);
   }
 
+  /**
+   * @dev Updates the price of a listed NFT.
+   */
   function updateListing(
     address _nftAddress,
     uint256 _tokenId,
@@ -133,6 +159,9 @@ contract Marketplace {
     emit Relisted(msg.sender, _nftAddress, _tokenId, _newPrice);
   }
 
+  /**
+   * @dev Withdraws proceeds earned by a seller.
+   */
   function withdrawProceeds() external {
     uint256 _proceeds = proceeds[msg.sender];
     require(_proceeds > 0, "NoProceeds");
@@ -141,15 +170,34 @@ contract Marketplace {
     require(success, "Withdrawal unsuccessful");
   }
 
-  function getListing(address _nftAddress, uint256 _tokenId) external view returns( Listing memory) {
+  /**
+   * @dev Retrieves the listing information of an NFT.
+   * @param _nftAddress address of the nft collection
+   * @param _tokenId token id of the specific NFT
+   */
+  function getListing(
+    address _nftAddress,
+    uint256 _tokenId
+  ) external view returns (Listing memory) {
     return listings[_nftAddress][_tokenId];
   }
 
-  function getProceeds() external view returns (uint256){
+  /**
+   * @dev Retrieves the proceeds earned by the caller.
+   */
+  function getProceeds() external view returns (uint256) {
     return proceeds[msg.sender];
   }
 
-  function getSeller(address _nftAddress, uint256 _tokenId) public view returns (address){
+  /**
+   * @dev Retrieves the seller of a listed NFT.
+   * @param _nftAddress address of the nft collection
+   * @param _tokenId token id of the specific NFT
+   */
+  function getSeller(
+    address _nftAddress,
+    uint256 _tokenId
+  ) public view returns (address) {
     Listing memory listing = listings[_nftAddress][_tokenId];
     return listing.seller;
   }
