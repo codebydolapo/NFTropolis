@@ -2,34 +2,52 @@ const { ethers } = require("hardhat");
 import fs from "fs";
 const { network } = require("hardhat");
 
-
 async function main() {
-
   const chainId = network.config.chainId;
 
   if (chainId == 31337) {
-
     try {
-      const Marketplace = await ethers.getContractFactory("Marketplace");
-      const marketplace = await Marketplace.deploy(
+      ////////////////////////////////////////////////////
+      console.log("--------------------------------------------------");
+      console.log("Deploying minter!");
+      const NFTropolis = await ethers.getContractFactory("NFTropolis");
+      const nfTropolis = await NFTropolis.deploy(
         "NFTropolis",
         "NFTR",
         "http://localhost:3000/api/"
       );
-      await marketplace.deployed();
-  
-      // const account = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-      const [account] = await ethers.getSigners();
-  
+      await nfTropolis.deployed();
+
       fs.writeFileSync(
         "src/nfTropolisAddress.js",
-        `export const nfTropolisAddress = "${marketplace.address}"`
+        `export const nfTropolisAddress = "${nfTropolis.address}"`
       );
+      console.log("-------------------------------------------------");
+      console.log(`minter deployed with address ${nfTropolis.address}, and written to src/nfTropolisAddress.js!`);
+
+      ///////////////////////////////////////////////////////////////
+      console.log("-------------------------------------------------");
+      console.log("Deploying marketplace!");
+      const Marketplace = await ethers.getContractFactory("Marketplace");
+      const marketplace = await Marketplace.deploy();
+      await marketplace.deployed();
+
+      // const account = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+      const [account] = await ethers.getSigners();
+
+      fs.writeFileSync(
+        "src/marketplaceAddress.js",
+        `export const marketplaceAddress = "${marketplace.address}"`
+      );
+      console.log("-------------------------------------------------");
+      console.log(`marketplace deployed with address ${marketplace.address}, and written to src/marketplaceAddress.js!`);
+
     } catch (error) {
+      console.log("--------------------------------------------------");
+      console.log("Operation failed!");
       console.log(error);
     }
   }
-
 }
 
 main().catch((error) => {

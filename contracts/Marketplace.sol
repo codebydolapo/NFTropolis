@@ -188,7 +188,6 @@ contract Marketplace {
   function getProceeds() external view returns (uint256) {
     return proceeds[msg.sender];
   }
-
   /**
    * @dev Retrieves the seller of a listed NFT.
    * @param _nftAddress address of the nft collection

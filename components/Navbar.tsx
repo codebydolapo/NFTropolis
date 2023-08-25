@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveAccount } from './reducers/action'
+import { ConnectButton } from 'web3uikit'
 
 
 function Navbar() {

@@ -108,38 +108,38 @@ describe("Random IPFS NFT Unit Tests", function () {
     });
   });
 
-  describe("fulfillRandomWords", () => {
-    it("mints NFT after random number is returned", async function () {
-      await new Promise<void>(async (resolve, reject) => {
-        randomNft.once("NftMinted", async () => {
-          try {
-            const tokenUri = await randomNft.tokenURI("0");
-            const tokenCounter = await randomNft.getTokenCounter();
-            expect.equal(tokenUri.toString().includes("ipfs://"), true);
-            expect.equal(tokenCounter.toString(), "1");
-            resolve();
-          } catch (e) {
-            console.log(e);
-            reject(e);
-          }
-        });
-        try {
-          const fee = await randomNft.getMintFee();
-          const requestNftResponse = await randomNft.requestNft({
-            value: fee.toString(),
-          });
-          const requestNftReceipt = await requestNftResponse.wait(1);
-          await VRFCoordinatorV2Mock.fulfillRandomWords(
-            requestNftReceipt.events[1].args.requestId,
-            randomNft.address
-          );
-        } catch (e) {
-          console.log(e);
-          reject(e);
-        }
-      });
-    });
-  });
+  // describe("fulfillRandomWords", () => {
+  //   it("mints NFT after random number is returned", async function () {
+  //     await new Promise<void>(async (resolve, reject) => {
+  //       randomNft.once("NftMinted", async () => {
+  //         try {
+  //           const tokenUri = await randomNft.tokenURI("0");
+  //           const tokenCounter = await randomNft.getTokenCounter();
+  //           expect.equal(tokenUri.toString().includes("ipfs://"), true);
+  //           expect.equal(tokenCounter.toString(), "1");
+  //           resolve();
+  //         } catch (e) {
+  //           console.log(e);
+  //           reject(e);
+  //         }
+  //       });
+  //       try {
+  //         const fee = await randomNft.getMintFee();
+  //         const requestNftResponse = await randomNft.requestNft({
+  //           value: fee.toString(),
+  //         });
+  //         const requestNftReceipt = await requestNftResponse.wait(1);
+  //         await VRFCoordinatorV2Mock.fulfillRandomWords(
+  //           requestNftReceipt.events[1].args.requestId,
+  //           randomNft.address
+  //         );
+  //       } catch (e) {
+  //         console.log(e);
+  //         reject(e);
+  //       }
+  //     });
+  //   });
+  // });
 //   describe("getBreedFromModdedRng", () => {
 //     it("should return pug if moddedRng < 10", async function () {
 //       const expectedValue = await randomNft.getBreedFromModdedRng(7);

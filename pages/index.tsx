@@ -113,19 +113,19 @@ export async function getServerSideProps() {
 
   const nfts: Metadata | undefined = await client.fetch(propertyQuery);
 
-  const metadata = {
-    name: nfts?.name,
-    image: nfts?.image,
-    description: nfts?.description,
-    external_url: nfts?.external_url
-  };
+  // const metadata = {
+  //   name: nfts?.name,
+  //   image: nfts?.image,
+  //   description: nfts?.description,
+  //   external_url: nfts?.external_url
+  // };
 
   return {
     props: {
       nfts,
-      name: nfts?.name,
-      image: nfts?.image,
-      description: nfts?.description,
+      // name: nfts?.name,
+      // image: nfts?.image,
+      // description: nfts?.description,
     },
   };
 }
