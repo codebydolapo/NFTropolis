@@ -13,7 +13,16 @@ interface Actions{
     }
 }
 
-
+const hamburgerState = (state = false, action: {type: string})=>{
+    switch(action.type){
+        case "HAMBURGER_ACTIVE":
+            return state= true;
+        case "HAMBURGER_INACTIVE":
+            return state=false;
+        default:
+            return false
+    }
+}
 
 export const itemData  = (state = {}, action: Actions)=>{
     switch(action.type){
@@ -79,5 +88,6 @@ export const allReducers = combineReducers({
     marketplaceContract,
     checkoutPopupState,
     NFTData,
-    Window
+    Window,
+    hamburgerState
 })

@@ -61,12 +61,12 @@ function Checkout() {
 
   function closePopup() {
     dispatch(deactivateCheckoutPopup());
-    dispatch(addItem(null));
+    dispatch(addItem({}));
   }
 
   return (
     <div
-      className={`md:w-[95%] md:h-[90vh] h-auto flex md:flex-row md:top-[5vh] bg-white xs:flex-col xs:h-[100vh] xs:w-full absolute rounded-lg xs:top-[50px] left-auto ${styles.checkout}`}
+      className={`md:w-[95%] md:h-[90vh] h-auto flex md:flex-row md:top-[5vh] bg-white xs:flex-col xs:h-[100vh] xs:w-[98%] absolute rounded-lg xs:top-[50px] left-auto ${styles.checkout}`}
     >
       <div
         className={`md:w-[40%] md:h-[100%] flex justify-center md:items-start pt-10 xs:w-[100%] xs:mb-4 xs:items-center xs:h-[45%] overflow-hidden `}

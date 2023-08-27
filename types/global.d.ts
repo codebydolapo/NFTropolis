@@ -1,5 +1,5 @@
 type Description = {
-  children: {
+  children?: {
     text?: string;
   };
   _type: "block";

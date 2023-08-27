@@ -5,6 +5,7 @@ import { activateCheckoutPopup } from './reducers/action';
 import { addItem } from './reducers/action'
 import { useEffect, useState, useMemo} from 'react';
 // import getNFTURL from '../utils/getNFTURL';
+import { Matic } from "@web3uikit/icons";
 
 
 interface Collection {
@@ -84,8 +85,9 @@ function NFTCard({ description, image, name, price}: any) {
                             </div>
                     </div>
                     <div className={`w-[50%] h-full flex items-center justify-end`}>
-                        <h3 className={`md:text-base font-bold text-[#0080FF] xs:text-sm`}>{price} MATIC</h3>
-                        <img className={`md:w-9 md:h-7 rounded-full xs:w-7 xs:h-5`} src={`/icons/polygonLogo.jpg`} alt={``} />
+                        <h3 className={`md:text-base md:mx-2 font-bold text-[#0080FF] xs:text-sm sm:mx-1`}>{price ? price : 0}</h3>
+                        <Matic fontSize={"1rem"}/>
+                        {/* <img className={`md:w-9 md:h-7 rounded-full xs:w-7 xs:h-5`} src={`/icons/polygonLogo.jpg`} alt={``} /> */}
                     </div>
                 </div>
             </div>

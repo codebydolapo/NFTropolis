@@ -6,6 +6,14 @@ interface Item{
     price: string
 }
 
+export const activateHamburger = () => {
+    return { type: "HAMBURGER_ACTIVE" }
+}
+
+export const deactivateHamburger = () => {
+    return { type: "HAMBURGER_INACTIVE" }
+}
+
 export const addItem = (item: Metadata)=>{
     return{
         type: "SET_ITEM",
