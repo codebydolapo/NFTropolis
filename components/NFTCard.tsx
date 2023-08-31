@@ -6,6 +6,7 @@ import { addItem } from './reducers/action'
 import { useEffect, useState, useMemo} from 'react';
 // import getNFTURL from '../utils/getNFTURL';
 import { Matic } from "@web3uikit/icons";
+import { useAccount } from 'wagmi';
 
 
 interface Collection {
@@ -22,21 +23,21 @@ function NFTCard({ description, image, name, price}: any) {
 
     const dispatch = useDispatch()
 
-    let Window: any;
-
-    useEffect(() => {
-        Window = (window as any).ethereum
-    }, [])
+    const {address, isConnected} = useAccount()
 
     function handleCheckout() {
-        dispatch(activateCheckoutPopup())
-        dispatch(addItem({
-            image,
-            name,
-            // index,
-            price,
-            description
-        }))
+        if(isConnected){
+            dispatch(activateCheckoutPopup())
+            dispatch(addItem({
+                image,
+                name,
+                // index,
+                price,
+                description
+            }))
+        } else{
+            alert("Please connect your wallet")
+        }
     }
 
     function truncateString(str: string, length: number) {
@@ -47,24 +48,9 @@ function NFTCard({ description, image, name, price}: any) {
         }
     }
 
-    useEffect(()=>{
-        // if(Number(index) == 1){
-            // temp()
-        // }
-    }, [Window])
-
-    // async function temp(){
-    //     const response = await getNFTURL(Window, index)
-    //         console.log(response)
-    // }
-
-
-
 
     return (
-        //  <Link href = '/item/item'>
-
-        <div className={`md:w-[18rem] md:h-[29rem] rounded-xl bg-[#ffffff] md:m-3 relative xs:w-[48%] xs:min-h-[20rem] xs:my-5 cursor-pointer ${styles.item}`} onClick={handleCheckout}>
+        <div className={`md:w-[18rem] md:h-[29rem] rounded-xl bg-[#ffffff] md:m-3 relative xs:w-[48%] xs:min-h-[20rem] xs:my-5 cursor-pointer ${styles.item}`} onClick={()=>handleCheckout()}>
             <div className={`md:w-[18rem] md:h-[18rem] rounded-tl-xl rounded-tr-xl overflow-hidden xs:w-full xs-h-[95vw]`}>
                 <img className={`rounded-tl-xl rounded-tr-xl md:w-auto md:h-full xs:w-full xs:h-auto ${styles.image}`} alt='' src={image} />
             </div>
@@ -73,12 +59,9 @@ function NFTCard({ description, image, name, price}: any) {
                     <h3 className={`text-sm text-[#000] font-bold`}>{name}</h3>
                 </div>
                 <div className={`w-full md:h-[40%] px-3 flex flex-col items-start justify-center xs:h-[50%]`}>
-                    {/* <h3 className={`text-xs`}>Price</h3>
-                    <h3 className={`text-xs font-bold`}>20ETH</h3> */}
-                    <h3 className={`md:text-sm text-[#000000e7] overflow-hidden xs:text-xs`}>{truncateString(description, 95)}</h3>
+                    <h3 className={`md:text-sm text-[#000000e7] xs:text-xs `}>{truncateString(description, 95)}</h3>
                 </div>
                 <div className={`w-full md:h-[30%] px-3 flex items-center justify-end border-t-[1px] border-grey xs:h-[23%]`}>
-                    {/* <h3 className={`text-[0.75rem] font-extralight text-[#000000d3]`}>Ends In 5 Days</h3> */}
                     <div className={`w-[50%] h-full flex items-center justify-start`}>
                            <div className={`w-[7rem] h-[2rem] rounded-md bg-[#00ff00] flex items-center justify-center`}>
                                 <p className={`text-sm text-white`}>Available</p>
@@ -87,7 +70,6 @@ function NFTCard({ description, image, name, price}: any) {
                     <div className={`w-[50%] h-full flex items-center justify-end`}>
                         <h3 className={`md:text-base md:mx-2 font-bold text-[#0080FF] xs:text-sm sm:mx-1`}>{price ? price : 0}</h3>
                         <Matic fontSize={"1rem"}/>
-                        {/* <img className={`md:w-9 md:h-7 rounded-full xs:w-7 xs:h-5`} src={`/icons/polygonLogo.jpg`} alt={``} /> */}
                     </div>
                 </div>
             </div>

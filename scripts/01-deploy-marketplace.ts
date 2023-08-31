@@ -1,6 +1,7 @@
 const { ethers } = require("hardhat");
 import fs from "fs";
 const { network } = require("hardhat");
+const PRICE = ethers.utils.parseEther("1");
 
 async function main() {
   const chainId = network.config.chainId;
@@ -23,7 +24,9 @@ async function main() {
         `export const nfTropolisAddress = "${nfTropolis.address}"`
       );
       console.log("-------------------------------------------------");
-      console.log(`minter deployed with address ${nfTropolis.address}, and written to src/nfTropolisAddress.js!`);
+      console.log(
+        `minter deployed with address ${nfTropolis.address}, and written to src/nfTropolisAddress.js!`
+      );
 
       ///////////////////////////////////////////////////////////////
       console.log("-------------------------------------------------");
@@ -40,8 +43,20 @@ async function main() {
         `export const marketplaceAddress = "${marketplace.address}"`
       );
       console.log("-------------------------------------------------");
-      console.log(`marketplace deployed with address ${marketplace.address}, and written to src/marketplaceAddress.js!`);
+      console.log(
+        `marketplace deployed with address ${marketplace.address}, and written to src/marketplaceAddress.js!`
+      );
 
+      //////////////////////////////////////////////////////////////
+      console.log("-------------------------------------------------");
+      console.log("minting and listing NFTs");
+
+      await nfTropolis.mintNFT({ value: PRICE });
+      await nfTropolis.setApprovalForAll(marketplace.address, true);
+
+      console.log("-------------------------------------------------");
+      console.log("minted and listed!");
+      
     } catch (error) {
       console.log("--------------------------------------------------");
       console.log("Operation failed!");

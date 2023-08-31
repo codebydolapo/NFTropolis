@@ -63,7 +63,7 @@ export const checkoutPopupState = (state = false, action: {type: string}) =>{
     }
 }
 
-export const NFTData = (state = [], action: {data: Metadata, type: string})=>{
+export const NFTData = (state = [], action: {data: Metadata | never[], type: string})=>{
         
     switch(action.type){
         case "SAVE_DATA":

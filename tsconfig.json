@@ -16,7 +16,7 @@
     "incremental": true,
   },
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/global.d.ts", "backend/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/global.d.ts", "backend/_index.js"],
   "exclude": ["node_modules"],
 }
 

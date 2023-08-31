@@ -15,6 +15,7 @@ type Image = {
 
 declare global {
    interface Metadata {
+        length: ReactNode;
       // nfts: {
         description?: Description | string;
         price?: null | number;

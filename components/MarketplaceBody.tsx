@@ -5,21 +5,17 @@ import NFTCard from "./NFTCard";
 import Checkout from "./Checkout";
 import { urlFor } from "../sanity/sanity.config";
 
-function MarketplaceBody() {
-  const [NFTs, setNFTs] = useState([]);
 
-  const account = useSelector((state: { account: string }) => {
-    return state.account;
-  });
+function MarketplaceBody() {
+  const [NFTs, setNFTs] = useState<any>([]);
+
   const checkoutPopupState = useSelector(
     (state: { checkoutPopupState: boolean }) => {
       return state.checkoutPopupState;
     }
   );
 
-  const NFTData = useSelector((state: any) => state.NFTData);
-
-  //   console.log(NFTData)
+  const NFTData = useSelector((state: {NFTData: Metadata}) => {return state.NFTData});
 
   useEffect(() => {
     setNFTs(NFTData);

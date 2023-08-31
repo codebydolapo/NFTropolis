@@ -5,8 +5,8 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   env: {
-    WALLET_CONNECT_PROJECT_ID : "4c1e28e64004e929ddd865fb5b2534c4",
-    ALCHEMY_API_KEY: "PDuY8jYr0QKSsa7gLrdD2SmEv8K5eboV",
+    WALLET_CONNECT_PROJECT_ID : process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+    ALCHEMY_API_KEY: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
   },
 }
 

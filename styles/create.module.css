@@ -1,0 +1,13 @@
+.container{
+    background: url('/images/bayc.png') no-repeat center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    height: calc(100vh - 60px)
+}
+
+.backdrop{
+    backdrop-filter: grayscale(10px);
+    background-color: rgba(0, 0, 0, 0.774);
+}

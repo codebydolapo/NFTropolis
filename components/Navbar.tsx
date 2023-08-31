@@ -14,6 +14,7 @@ import styles from "../styles/navbar.module.css";
 import { activateHamburger, deactivateHamburger } from "./reducers/action";
 import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import Dropdown from "./dropdown/Dropdown";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -79,15 +80,15 @@ function Navbar() {
   ///////////////////////////////////
   const {address} = useAccount()
   useEffect(()=>{
-    console.log(address)
-  })
+    address ?? console.log(address)
+  }, [address])
   //////////////////////////////////
 
   
 
   return (
     <div
-      className={`w-full h-[60px] duration-[500ms] ${
+      className={`w-full h-[60px] transition duration-[500ms] ${
         hamburgerState ? "bg-[#000]" : "bg-[#fff]"
       } flex flex-row items-center space-between md:pl-[2rem]`}
     >
@@ -178,6 +179,9 @@ function Navbar() {
             />
           </section>}
         </div>
+        {/* <div className = {`w-[5rem] h-[40px] border-2 border-black`}>
+          <Dropdown/>
+        </div> */}
         <div
           className={`${styles.hamburger} md:ml-[5rem] mr-[2px]`}
           onClick={handleBurgerState}

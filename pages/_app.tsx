@@ -5,7 +5,7 @@ import { allReducers } from "../components/reducers/reducer";
 import { createStore } from "redux";
 import { MoralisProvider } from "react-moralis";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
-import { polygonMumbai, mainnet, polygon, sepolia } from "wagmi/chains";
+import { polygonMumbai, mainnet, polygon, sepolia, localhost, hardhat } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 require("dotenv").config;
@@ -21,7 +21,7 @@ import { useEffect } from "react";
 const store = createStore(allReducers);
 
 const { publicClient, webSocketPublicClient, chains } = configureChains(
-  [polygonMumbai],
+  [mainnet, polygonMumbai, localhost, hardhat],
   [
     alchemyProvider({
       apiKey: process.env.ALCHEMY_API_KEY ?? "",
@@ -45,7 +45,7 @@ const config = createConfig({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MoralisProvider initializeOnMount={false}>
+    // <MoralisProvider initializeOnMount={false}>
       <Provider store={store}>
         <WagmiConfig config={config}>
           <RainbowKitProvider chains={chains}>
@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </RainbowKitProvider>
         </WagmiConfig>
       </Provider>
-    </MoralisProvider>
+    // </MoralisProvider>
   );
 }
 

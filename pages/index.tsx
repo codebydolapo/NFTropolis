@@ -5,18 +5,26 @@ import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
 import Landing from "../components/Landing";
 import { useEffect, useState } from "react";
-import { saveMarketplaceContract } from "../components/reducers/action";
 import { useDispatch, useSelector } from "react-redux";
 import { nfTropolisAddress } from "../src/nfTropolisAddress";
 import nfTropolisABI from "../artifacts/contracts/NFTropolis.sol/NFTropolis.json";
-// import minterABI from "../artifacts/contracts/Minter.sol/Minter.json";
+import { marketplaceAddress } from "../src/marketplaceAddress";
+import marketplaceABI from "../artifacts/contracts/Marketplace.sol/Marketplace.json";
 // import { minterAddress } from '../src/minterAddress'
 import metadata from "../data/data.json";
 import { saveNFTData, saveWindow } from "../components/reducers/action";
 import { client } from "../sanity/sanity.config";
 import Menu from "../components/Menu";
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useContractRead,
+  useAccount,
+} from "wagmi";
+import getCount from "../components/hooks/useCount";
+import MarketplaceBody from "../components/MarketplaceBody";
 
-const Home: NextPage = ({ nfts }: any) => {
+const Home = ({ nfts }: any) => {
   const [_effectState, setEffectState] = useState(true);
   let Window: any;
   const dispatch = useDispatch();
@@ -26,58 +34,50 @@ const Home: NextPage = ({ nfts }: any) => {
   useEffect(() => {
     Window = (window as any).ethereum;
     // console.log(nfts);
+    dispatch(saveNFTData(nfts))
   }, []);
 
-  const startUp = async () => {
-    if (!Window) {
-      alert("Please install MetaMask!");
-      return;
-    }
+  const { address } = useAccount();
 
-    const provider = new ethers.providers.Web3Provider(Window);
-    const signer = provider.getSigner();
+  const {
+    data,
+    isError: countErrorState,
+    isFetching: countFetchingState,
+    isLoading: countLoadingState,
+  } = useContractRead({
+    address: nfTropolisAddress,
+    abi: nfTropolisABI.abi,
+    functionName: "getMintedTokenCount",
+    // args: []
+  });
 
-    const nfTropolis = new ethers.Contract(
-      nfTropolisAddress,
-      nfTropolisABI.abi,
-      // provider
-      signer
-    );
+  const { config, error } = usePrepareContractWrite({
+    address: nfTropolisAddress,
+    abi: nfTropolisABI.abi,
+    functionName: "mintNFT",
+    args: [],
+  });
 
-    const nfTropolisSigner = new ethers.Contract(
-      nfTropolisAddress,
-      nfTropolisABI.abi,
-      // provider
-      signer
-    );
-
-    // console.log(nfTropolis);
-
-    // for (let i = 1; i <= metadata.length; i++) {
-    //   if (_effectState) {
-    //     const response = await nfTropolis.tokenURI(i);
-    //     const rawData = await fetch(response);
-    //     const data: any = await rawData.json();
-    //     const isOwned = await nfTropolis.isOwned(i);
-    //     data.isOwned = isOwned;
-    //     dataArray.push(data);
-    //   }
-    // }
-
-    dispatch(saveNFTData(nfts));
-    dispatch(saveNFTData(nfts));
-    dispatch(saveMarketplaceContract(nfTropolis));
-
-    setEffectState(false);
-
-    // console.log(dataArray)
-
-    dispatch(saveWindow(Window));
-  };
+  const {
+    data: mintData,
+    isLoading,
+    isSuccess,
+    write,
+  } = useContractWrite(config);
 
   useEffect(() => {
-    startUp();
+    console.log(Number(data));
+    isSuccess ?? console.log(mintData);
+    // }, [countFetchingState])
+  }, [isSuccess]);
+
+  
+  useEffect(() => {
+    // startUp();
     setEffectState(false);
+    // const {data}: any = getCount();
+    // console.log(data)
+    // address ?? console.log(data)
   }, []);
 
   return (
@@ -88,8 +88,14 @@ const Home: NextPage = ({ nfts }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Landing />
-      <Menu/>
+      {/* <button
+        className={`w-[120px] h-[40px] bg-black text-white rounded-lg`}
+        onClick={() => write?.()}
+      >
+        test button
+      </button> */}
+      <MarketplaceBody />
+      <Menu />
     </div>
   );
 };

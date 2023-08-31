@@ -37,7 +37,7 @@ function Menu() {
     <div className={hamburgerState ? styles.menu : styles.menuActive}>
       {hamburgerState && (
         <>
-          <Link href="/#home">
+          <Link href="/">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <HomeIcon className={styles.ChevronUpIcon} />
               <h1>Home</h1>
@@ -49,16 +49,16 @@ function Menu() {
               <h1>My Assets</h1>
             </div>
           </Link>
-          <Link href="/#portfolio">
+          <Link href="/create">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <CashIcon className={styles.ChevronUpIcon} />
-              <h1>Sell</h1>
+              <h1>Create</h1>
             </div>
           </Link>
           <Link href="/#skills">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <CogIcon className={styles.ChevronUpIcon} />
-              <h1>Skills</h1>
+              <h1>List</h1>
             </div>
           </Link>
           <Link href="/#blog">
