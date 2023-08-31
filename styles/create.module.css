@@ -8,6 +8,5 @@
 }
 
 .backdrop{
-    backdrop-filter: grayscale(10px);
     background-color: rgba(0, 0, 0, 0.774);
 }

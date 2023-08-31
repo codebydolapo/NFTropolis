@@ -20,14 +20,14 @@ function DropZone() {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <div {...getRootProps()} className = {`border-dashed  w-full h-full flex items-center justify-center cursor-pointer`}>
+    <div {...getRootProps()} className = {`h-[100%] w-[100%] border-dashed flex items-center justify-center cursor-pointer `}>
     {/* <div {...getRootProps()} className = {`border-2 border-dashed border-white w-full h-full`}> */}
       <input {...getInputProps()} />
       {
         isDragActive ?
-        <div className = {`w-[70%] h-[70%] flex flex-col items-center justify-center`}>
+        <div className = {`w-[70%] h-[70%] flex flex-col items-center justify-center `}>
             <img
-              className={`md:w-[50px] md:h-[50px] rounded-full m-2 xs:w-[40px] xs:h-[40px]`}
+              className={`md:w-[50px] rounded-full m-2 xs:w-[70px]`}
               alt=""
               src="/icons/upload.webp"
             />
@@ -36,7 +36,7 @@ function DropZone() {
           :
           <div className = {`w-[70%] h-[70%] flex flex-col items-center justify-center`}>
             <img
-              className={`md:w-[50px] md:h-[50px] rounded-full m-2 xs:w-[40px] xs:h-[40px]`}
+              className={`md:w-[50px] rounded-full m-2 xs:w-[70px]`}
               alt=""
               src="/icons/upload.webp"
             />
