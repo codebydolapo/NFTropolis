@@ -11,6 +11,8 @@ import {
   MailIcon,
   PhotographIcon,
   CashIcon,
+  PencilAltIcon,
+  ViewListIcon
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,13 +53,13 @@ function Menu() {
           </Link>
           <Link href="/create">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
-              <CashIcon className={styles.ChevronUpIcon} />
+              <PencilAltIcon className={styles.ChevronUpIcon} />
               <h1>Create</h1>
             </div>
           </Link>
           <Link href="/#skills">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
-              <CogIcon className={styles.ChevronUpIcon} />
+              <ViewListIcon className={styles.ChevronUpIcon} />
               <h1>List</h1>
             </div>
           </Link>
