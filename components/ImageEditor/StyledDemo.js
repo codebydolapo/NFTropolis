@@ -11,7 +11,11 @@ import { getCroppedImg, getRotatedImage } from "./CanvasUtils";
 import { styles } from "./Styles";
 import { CropIcon, ZoomInIcon, DeleteIcon, Rotate3dIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { activateEditorPopup, deactivateEditorPopup } from "../reducers/action";
+import {
+  activateEditorPopup,
+  deactivateEditorPopup,
+  saveImage,
+} from "../reducers/action";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CheckIcon } from "lucide-react";
 import { Button } from "@mui/material";
@@ -70,10 +74,6 @@ const Index = ({ classes }) => {
     return state.editedImage;
   });
 
-  const selectedImage = useSelector((state) => {
-    return state.imageToBeEdited;
-  });
-
   const onFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -96,11 +96,16 @@ const Index = ({ classes }) => {
 
   function flipEditState() {
     editState
-      ? (() => {
+      ? (async () => {
           dispatch(deactivateEditorPopup());
-          if (imageSrc || imagePath) {
-            toast("Finalized!");
-          }
+          const croppedImage = await getCroppedImg(
+            imageSrc,
+            croppedAreaPixels,
+            rotation
+          );
+          // console.log("donee", { croppedImage });
+          dispatch(saveImage(croppedImage));
+          toast("Finalized!");
         })()
       : (() => {
           dispatch(activateEditorPopup());

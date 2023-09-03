@@ -1,4 +1,5 @@
 // import uploadFile from './index'
+import { toast } from "react-hot-toast";
 
 
 async function handleCreate(path, name, description) {
@@ -7,16 +8,16 @@ async function handleCreate(path, name, description) {
       name == "" ?? toast.error("Please provide a valid filename");
     } else {
       try {
-        // const res = await uploadFile(path, name, description);
-        // toast.promise(res,
-        //   {
-        //     loading: "Loading",
-        //     success: "Got the data",
-        //     error: "Error when fetching",
-        //   }
-        // );
-        // console.log("File uploaded!");
-        // toast.success("NFT Minted!");
+        const res = await uploadFile(path, name, description);
+        toast.promise(res,
+          {
+            loading: "Loading",
+            success: "Got the data",
+            error: "Error when fetching",
+          }
+        );
+        console.log("File uploaded!");
+        toast.success("NFT Minted!");
           console.log(path);
       } catch (error) {
         console.error(error);

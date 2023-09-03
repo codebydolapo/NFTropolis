@@ -95,13 +95,13 @@ function CreateBody() {
                     className={`absolute top-0 right-0 w-[5rem] h-[2.5rem] flex items-center justify-around`}
                   >
                     <div
-                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-2 border-white`}
+                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-[1px] border-white`}
                       onClick={flipEditState}
                     >
                       <Pencil />
                     </div>
                     <div
-                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-2 border-white`}
+                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-[1px] border-white`}
                       onClick={handleDelete}
                     >
                       <Trash />
