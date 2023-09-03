@@ -64,6 +64,9 @@ function Checkout() {
     dispatch(addItem({}));
   }
 
+
+  //ADD RATING FUNCTIONALITY FROM MUI
+
   return (
     <div
       className={`md:w-[95%] md:h-[90vh] h-auto flex md:flex-row md:top-[5vh] bg-white xs:flex-col xs:h-[100vh] xs:w-[98%] absolute rounded-lg xs:top-[50px] left-auto ${styles.checkout}`}

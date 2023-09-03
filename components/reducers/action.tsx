@@ -54,6 +54,24 @@ export const deactivateCheckoutPopup = ()=>{
         type: "DEACTIVATE_POPUP"
     }
 }
+export const activateEditorPopup = ()=>{
+    return{
+        type: "ACTIVATE_EDITOR_POPUP",
+    }
+}
+
+export const deactivateEditorPopup = ()=>{
+    return{
+        type: "DEACTIVATE_EDITOR_POPUP"
+    }
+}
+
+export const saveImage = (image: string)=>{
+    return{
+        type: "SAVE_IMAGE",
+        image
+    }
+}
 
 export const saveNFTData = (data: Metadata)=>{
     return {

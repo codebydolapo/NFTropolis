@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { activateHamburger, deactivateHamburger } from "./reducers/action";
 // import shortenAddress from "../utils/shortenAddress"
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 function Menu() {
   const hamburgerState = useSelector((state: any) => state.hamburgerState);
@@ -33,7 +34,16 @@ function Menu() {
     }
   }
 
-  const _storedAddress = useSelector((state: any) => state.connectedAddress);
+  const {address} = useAccount()
+
+  function returnAddress(){
+    if(address){
+      return `${address}/assets`
+    } else{
+      alert("Please connect wallet!")
+    }
+  }
+
 
   return (
     <div className={hamburgerState ? styles.menu : styles.menuActive}>
@@ -45,7 +55,7 @@ function Menu() {
               <h1>Home</h1>
             </div>
           </Link>
-          <Link href="/#about">
+          <Link href={`${address ? `${address}/assets`: null}`}>
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <PhotographIcon className={styles.ChevronUpIcon} />
               <h1>My Assets</h1>
@@ -60,7 +70,7 @@ function Menu() {
           <Link href="/#skills">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <ViewListIcon className={styles.ChevronUpIcon} />
-              <h1>List</h1>
+              <h1>List/Sell</h1>
             </div>
           </Link>
           <Link href="/#blog">

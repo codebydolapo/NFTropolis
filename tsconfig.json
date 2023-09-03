@@ -16,7 +16,7 @@
     "incremental": true,
   },
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/global.d.ts", "backend/_index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/global.d.ts", "backend/_index.js", "components/_Pintura.tsx", "components/easycrop/imgDialog.js"],
   "exclude": ["node_modules"],
 }
 
