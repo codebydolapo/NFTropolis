@@ -1,10 +1,6 @@
 import styles from "../styles/create.module.css";
 import { useState } from "react";
-import DropZone from "./DropZone";
 // import Dropzone from 'react-dropzone'
-import _Pintura from "./_Pintura";
-import EasyCrop from "./easycrop/EasyCrop";
-import StyledDemo from "./test/Index";
 import { useSelector, useDispatch } from "react-redux";
 import { deactivateEditorPopup, activateEditorPopup } from "./reducers/action";
 

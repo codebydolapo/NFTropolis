@@ -63,7 +63,6 @@ export const checkoutPopupState = (state = false, action: {type: string}) =>{
     }
 }
 export const imageEditorPopupState = (state = false, action: {type: string}) =>{
-   console.log(state)
     switch(action.type){
         case "ACTIVATE_EDITOR_POPUP":
             return true

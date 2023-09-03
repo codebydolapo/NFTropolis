@@ -1,10 +1,6 @@
-import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch, useSelector } from "react-redux";
-import EasyCrop from "./easycrop/EasyCrop";
-import { BackspaceIcon } from "@heroicons/react/outline";
 import styles from "../styles/editModal.module.css";
-import { activateEditorPopup, deactivateEditorPopup } from "./reducers/action";
-import StyledDemo from "./test/StyledDemo";
+import StyledDemo from "./ImageEditor/StyledDemo";
 
 function ImageEditModal() {
   const dispatch = useDispatch();
