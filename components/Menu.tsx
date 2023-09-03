@@ -12,7 +12,7 @@ import {
   PhotographIcon,
   CashIcon,
   PencilAltIcon,
-  ViewListIcon
+  ViewListIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,11 +20,18 @@ import { activateHamburger, deactivateHamburger } from "./reducers/action";
 // import shortenAddress from "../utils/shortenAddress"
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
+import { toast } from "react-hot-toast";
+import { useRouter } from 'next/router'
 
 function Menu() {
   const hamburgerState = useSelector((state: any) => state.hamburgerState);
 
+  const router = useRouter();
+
   const dispatch = useDispatch();
+
+  const { address } = useAccount();
+
 
   function handleBurgerState() {
     if (hamburgerState == false) {
@@ -34,16 +41,18 @@ function Menu() {
     }
   }
 
-  const {address} = useAccount()
-
-  function returnAddress(){
-    if(address){
-      return `${address}/assets`
-    } else{
-      alert("Please connect wallet!")
+  const handleRefresh = () => {
+    if (address) {
+      router.push(`${address}/assets`)
+    } else {
+      toast.error("Please connect your wallet!");
     }
-  }
+  };
 
+  function handleAssetsLinking(){
+    handleRefresh()
+    handleBurgerState() 
+  }
 
   return (
     <div className={hamburgerState ? styles.menu : styles.menuActive}>
@@ -55,12 +64,12 @@ function Menu() {
               <h1>Home</h1>
             </div>
           </Link>
-          <Link href={`${address ? `${address}/assets`: null}`}>
-            <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
+          {/* <Link onClick = {handleRefresh}> */}
+            <div className={`${styles.menuDiv}`} onClick={handleAssetsLinking}>
               <PhotographIcon className={styles.ChevronUpIcon} />
               <h1>My Assets</h1>
             </div>
-          </Link>
+          {/* </Link> */}
           <Link href="/create">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
               <PencilAltIcon className={styles.ChevronUpIcon} />

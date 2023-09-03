@@ -4,6 +4,7 @@ import AssetsBody from "../../components/AssetsBody";
 import Menu from "../../components/Menu";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 function Assets() {
   const router = useRouter();
@@ -25,6 +26,11 @@ function Assets() {
       <Navbar />
       <AssetsBody />
       <Menu />
+      <Toaster
+       position="bottom-right"
+       reverseOrder={false}
+       gutter={8}
+      />
     </div>
   );
 }

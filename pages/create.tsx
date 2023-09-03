@@ -4,6 +4,7 @@ import CreateBody from "../components/CreateBody";
 import Menu from "../components/Menu";
 import ImageEditModal from "../components/ImageEditModal";
 import { useSelector } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
 
 function Create() {
 
@@ -20,6 +21,11 @@ function Create() {
       <CreateBody />
       {editState && <ImageEditModal/>}
       <Menu/>
+      <Toaster
+       position="bottom-right"
+       reverseOrder={false}
+       gutter={8}
+      />
     </div>
   );
 }

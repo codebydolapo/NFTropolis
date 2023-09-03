@@ -2,16 +2,27 @@ import styles from "../styles/create.module.css";
 import { useState } from "react";
 // import Dropzone from 'react-dropzone'
 import { useSelector, useDispatch } from "react-redux";
-import { deactivateEditorPopup, activateEditorPopup } from "./reducers/action";
+import { deactivateEditorPopup, activateEditorPopup, saveImage } from "./reducers/action";
 import CheckIcon from "@mui/icons-material/Check";
+import { PencilAltIcon } from "@heroicons/react/outline";
+import { Pencil, Trash } from "lucide-react";
 import { Button } from "@mui/material";
-import { EditIcon } from "lucide-react";
+import { EditIcon, DeleteIcon } from "lucide-react";
+import { toast } from "react-hot-toast";
+import handleCreate from "../backend/handleCreate";
 
 function CreateBody() {
   const dispatch = useDispatch();
 
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   const editState = useSelector((state: any) => {
     return state.imageEditorPopupState;
+  });
+
+  const imagePath = useSelector((state: any) => {
+    return state.editedImage;
   });
 
   function flipEditState() {
@@ -24,9 +35,22 @@ function CreateBody() {
         })();
   }
 
+  const handleNameUpdate = (event: any) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionUpdate = (event: any) => {
+    setName(event.target.value);
+  };
+
+  function handleDelete(){
+    dispatch(saveImage(""))
+    toast("Image Removed!")
+  }
+
   return (
     <>
-      <div className={`w-[100vw] ${styles.container}`}>
+      <div className={`w-[100vw] mt-[60px] ${styles.container}`}>
         <div
           className={`w-[100%] h-[100%] md:py-[5rem] xs:py-3 overflow-y-scroll overflow-x-hidden flex flex-col items-center ${styles.backdrop}`}
         >
@@ -54,13 +78,37 @@ function CreateBody() {
                 File types supported: JPG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG,
                 GLB, GLTF. Max size: 100Mb{" "}
               </p>
-              <div
-                className={`md:w-[25rem] md:h-[15rem] flex flex-col items-center justify-center border-2 border-white border-dashed my-[0.25rem] rounded-lg text-white text-sm xs:w-[98vw] xs:h-[98vw] cursor-pointer`}
-                onClick={flipEditState}
-              >
-                <img className={`w-[3rem] my-2`} src="/icons/upload.webp" />
-                <p>Click hotspot to upload image</p>
-              </div>
+              {!imagePath ? (
+                <div
+                  className={`md:w-[25rem] md:h-[15rem] flex flex-col items-center justify-center border-2 border-white border-dashed my-[0.25rem] rounded-lg text-white text-sm xs:w-[98vw] xs:h-[98vw] cursor-pointer`}
+                  onClick={flipEditState}
+                >
+                  <img className={`w-[3rem] my-2`} src="/icons/upload.webp" />
+                  <p>Click hotspot to upload image</p>
+                </div>
+              ) : (
+                <div
+                  className={`md:w-[25rem] md:h-[15rem] flex flex-col items-center justify-center my-[0.25rem] rounded-lg text-white text-sm xs:w-[98vw] xs:h-[98vw] cursor-pointer relative`}
+                >
+                  <img className={`max-w-[98%] max-h-[98%]`} src={imagePath} />
+                  <div
+                    className={`absolute top-0 right-0 w-[5rem] h-[2.5rem] flex items-center justify-around`}
+                  >
+                    <div
+                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-2 border-white`}
+                      onClick={flipEditState}
+                    >
+                      <Pencil />
+                    </div>
+                    <div
+                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-2 border-white`}
+                      onClick={handleDelete}
+                    >
+                      <Trash />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             <div
               className={`md:w-[90%] md:h-[7rem] rounded-lg my-3 px-2 flex items-start, justify-around flex-col xs:w-[100%] xs:h-[7rem] `}
@@ -72,6 +120,7 @@ function CreateBody() {
                 className={`w-[98%] h-[3rem] rounded-lg border-[1px] border-[white] my-3 bg-inherit outline-none px-2 text-sm text-white`}
                 type="text"
                 placeholder="Item Name"
+                onChange={handleNameUpdate}
               />
             </div>
             <div
@@ -104,10 +153,10 @@ function CreateBody() {
                 Description
               </h1>
 
-              <input
-                className={`w-[98%] h-[5rem] rounded-lg border-[1px] border-[white] md:my-3 bg-inherit outline-none px-2 text-sm text-white`}
-                type="text"
+              <textarea
+                className={`w-[98%] min-h-[7rem] rounded-lg border-[1px] border-[white] md:my-3 bg-inherit outline-none px-2 text-sm text-white`}
                 placeholder="Provide a detailed description of your item"
+                onChange={handleDescriptionUpdate}
               />
             </div>
             <div
@@ -117,6 +166,7 @@ function CreateBody() {
                 variant="contained"
                 endIcon={<EditIcon />}
                 className={`bg-[#0080FF]`}
+                onClick={() => handleCreate(imagePath, name, description)}
               >
                 Create
               </Button>

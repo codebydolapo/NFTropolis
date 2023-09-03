@@ -8,27 +8,31 @@ const admin = firebaseAdmin.initializeApp({
 
 const storageRef = admin.storage().bucket("gs://nftropolis-e514a.appspot.com");
 
-async function uploadFile(path, fileName) {
+async function uploadFile(path, name, description) {
   const storage = storageRef.upload(path, {
     public: true,
-    destination: `image/${fileName}`,
+    destination: `image/${name}`,
     metadata: {
       metadata: {
         firebaseStorageDownloadTokens: uuidv4(),
-        name: "one",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+        // name,
+        // description
       },
     },
   });
+  console.log(path)
   return storage;
 }
 
-(async ()=>{
-    try{
-        const res = await uploadFile(`backend/images/1.png`, `1.png`);
-        console.log(res)
-        console.log("File uploaded!")
-    } catch(error){
-        console.error(error)
-    }
-})();
+
+// (async ()=>{
+//   try{
+//     const res = await uploadFile(`backend/images/1.png`, `1.png`);
+//     console.log(res)
+//     console.log("File uploaded!")
+//   } catch(error){
+//     console.error(error)
+//   }
+// })();
+
+export default uploadFile

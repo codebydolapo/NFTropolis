@@ -24,7 +24,7 @@ function MarketplaceBody() {
   return (
     <>
       <div
-        className={`w-full min-h-[100vh] h-auto flex flex-col items-center relative`}
+        className={`w-full min-h-[100vh] h-auto flex flex-col items-center relative mt-[60px]`}
       >
         <div className={`w-full h-auto relative mb-[2rem]`}>
           <img
@@ -111,7 +111,8 @@ function MarketplaceBody() {
             <div
               className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around md:px-5 xs:w-[100%] ${styles.itemsContainer}`}
             >
-              {!checkoutPopupState &&
+              {
+              // !checkoutPopupState &&
                 NFTs.map(({ description, image, name, price }: Metadata) => {
                   return (
                     <NFTCard
@@ -124,7 +125,6 @@ function MarketplaceBody() {
                     />
                   );
                 })}
-              {checkoutPopupState && <Checkout />}
             </div>
           </div>
         </div>

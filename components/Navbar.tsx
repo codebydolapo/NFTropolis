@@ -69,28 +69,27 @@ function Navbar() {
   const hamburgerState = useSelector((state: any) => state.hamburgerState);
   const _storedAddress = useSelector((state: any) => state.connectedAddress);
 
-  function handleBurgerState() {
+  function handleBurgerState(event: any) {
     if (hamburgerState == false) {
       dispatch(activateHamburger());
     } else if (hamburgerState == true) {
       dispatch(deactivateHamburger());
-    }
+      // Check if the click target is not a descendant of the component.
+    } 
   }
 
   ///////////////////////////////////
-  const {address} = useAccount()
-  useEffect(()=>{
-    address ?? console.log(address)
-  }, [address])
+  const { address } = useAccount();
+  useEffect(() => {
+    address ?? console.log(address);
+  }, [address]);
   //////////////////////////////////
-
-  
 
   return (
     <div
       className={`w-full h-[60px] transition duration-[500ms] ${
         hamburgerState ? "bg-[#000]" : "bg-[#fff]"
-      } flex flex-row items-center space-between md:pl-[2rem]`}
+      } flex flex-row items-center space-between md:pl-[2rem] fixed top-0 left-0 z-[100] `}
     >
       <div className={`w-[50%] h-full flex items-center justify-between`}>
         <div
@@ -113,44 +112,6 @@ function Navbar() {
       <div
         className={`w-[50%] h-full flex lg:justify-end xs:justify-end  items-center`}
       >
-        {/* <div
-          className={`md:w-[75%] h-full lg:flex justify-between xs:w-0 xs:hidden`}
-        >
-          <Link href="/">
-            <div
-              className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}
-            >
-              <h1
-                className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}
-              >
-                Home
-              </h1>
-            </div>
-          </Link>
-          <Link href="/marketplace">
-            <div
-              className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}
-            >
-              <h1
-                className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}
-              >
-                Marketplace
-              </h1>
-            </div>
-          </Link>
-          <div
-            className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}
-          >
-            <h1
-              className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}
-            >
-              Create
-            </h1>
-          </div>
-          {/* <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
-                    </div> 
-        </div> */}
         <div
           className={`lg:w-[25%] h-full flex md:mx-0 xs:mx-2 md:w-[40%] xs:w-[70%] justify-center items-center `}
         >
@@ -163,25 +124,23 @@ function Navbar() {
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
                         </div>
                     } */}
-          {!hamburgerState && <section
-            className={`w-[12rem] h-[45px] lg:text-sm xs:text-xs flex justify-center items-center rounded-lg text-[#fff]`}
-          >
-            <ConnectButton
-             accountStatus={{
-              smallScreen: 'avatar',
-              largeScreen: 'full',
-            }}
-            showBalance={{
-              smallScreen: false,
-              largeScreen: false,
-            }}
-            // label = "Connect"
-            />
-          </section>}
+          {!hamburgerState && (
+            <section
+              className={`w-[12rem] h-[45px] lg:text-sm xs:text-xs flex justify-center items-center rounded-lg text-[#fff]`}
+            >
+              <ConnectButton
+                accountStatus={{
+                  smallScreen: "avatar",
+                  largeScreen: "full",
+                }}
+                showBalance={{
+                  smallScreen: false,
+                  largeScreen: false,
+                }}
+              />
+            </section>
+          )}
         </div>
-        {/* <div className = {`w-[5rem] h-[40px] border-2 border-black`}>
-          <Dropdown/>
-        </div> */}
         <div
           className={`${styles.hamburger} md:ml-[5rem] mr-[2px]`}
           onClick={handleBurgerState}

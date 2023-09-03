@@ -3,7 +3,6 @@ import { ethers } from "ethers";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
-import Landing from "../components/Landing";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nfTropolisAddress } from "../src/nfTropolisAddress";
@@ -23,6 +22,9 @@ import {
 } from "wagmi";
 import getCount from "../components/hooks/useCount";
 import MarketplaceBody from "../components/MarketplaceBody";
+import toast, { Toaster } from 'react-hot-toast';
+import Checkout from "../components/Checkout";
+
 
 const Home = ({ nfts }: any) => {
   const [_effectState, setEffectState] = useState(true);
@@ -80,6 +82,15 @@ const Home = ({ nfts }: any) => {
     // address ?? console.log(data)
   }, []);
 
+
+  const checkoutPopupState = useSelector(
+    (state: { checkoutPopupState: boolean }) => {
+      return state.checkoutPopupState;
+    }
+  );
+
+
+
   return (
     <div className={`font-montserrat ${styles.container}`}>
       <Head>
@@ -90,6 +101,12 @@ const Home = ({ nfts }: any) => {
       <Navbar />
       <MarketplaceBody />
       <Menu />
+      {checkoutPopupState && <Checkout />}
+      <Toaster
+      position="bottom-right"
+      reverseOrder={false}
+      gutter={8}
+      />
     </div>
   );
 };

@@ -11,6 +11,7 @@ export const styles = theme => ({
     cropButton: {
       flexShrink: 0,
       marginLeft: 16,
+      background: "blue"
     },
     controls: {
       padding: 16,

@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 import { saveImage } from "../reducers/action";
 // import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const styles = {
   appBar: {
@@ -81,16 +82,19 @@ class ImgDialog extends React.Component {
               >
                 Cropped image
               </Typography>
-              <Button
-                variant="contained"
-                endIcon={<CheckIcon />}
-                className={`bg-[#0080FF]`}
-                onClick={() => {
-                  dispatch(saveImage(this.props.img));
-                }}
-              >
-                Done
-              </Button>
+              <div onClick={this.props.onClose}>
+                <Button
+                  variant="contained"
+                  endIcon={<CheckIcon />}
+                  className={`bg-[#0080FF]`}
+                  onClick={() => {
+                    dispatch(saveImage(this.props.img));
+                    toast("Image Set!");
+                  }}
+                >
+                  Done
+                </Button>
+              </div>
             </Toolbar>
           </AppBar>
           <div className={classes.imgContainer}>
@@ -107,6 +111,10 @@ class ImgDialog extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
+});
+
+const mapStateToProps = (state) => ({
+  editState: state.editState,
 });
 
 export default withStyles(styles)(connect(mapDispatchToProps)(ImgDialog));

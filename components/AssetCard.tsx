@@ -21,27 +21,8 @@ interface Collection {
   // listingStatus: any
 }
 
-function NFTCard({ description, image, name, price }: any) {
-  const dispatch = useDispatch();
-
-  const { address, isConnected } = useAccount();
-
-  function handleCheckout() {
-    if (isConnected) {
-      dispatch(activateCheckoutPopup());
-    //   dispatch(
-    //     addItem({
-    //       image,
-    //       name,
-    //       // index,
-    //       price,
-    //       description,
-    //     })
-    //   );
-    } else {
-      toast.error("Please connect your wallet");
-    }
-  }
+function AssetCard({ description, image, name, price }: any) {
+  
 
   function truncateString(str: string, length: number) {
     if (str.length <= length) {
@@ -54,7 +35,6 @@ function NFTCard({ description, image, name, price }: any) {
   return (
     <div
       className={`md:w-[18rem] md:h-[29rem] rounded-xl bg-[#ffffff] md:m-3 relative xs:w-[48%] xs:min-h-[20rem] xs:my-5 cursor-pointer ${styles.item}`}
-      onClick={() => handleCheckout()}
     >
       <div
         className={`md:w-[18rem] md:h-[18rem] rounded-tl-xl rounded-tr-xl overflow-hidden xs:w-full xs-h-[95vw]`}
@@ -84,9 +64,6 @@ function NFTCard({ description, image, name, price }: any) {
           className={`w-full md:h-[30%] px-3 flex items-center justify-end border-t-[1px] border-grey xs:h-[23%]`}
         >
           <div className={`w-[50%] h-full flex items-center justify-start`}>
-            {/* <div className={`w-[7rem] h-[2rem] rounded-md bg-[#00ff00] flex items-center justify-center`}>
-                                <p className={`text-sm text-white`}>Available</p>
-                            </div> */}
             <Button variant="contained" endIcon={<CheckIcon />} className = {`bg-[#0080FF]`}>
               Available
             </Button>
@@ -101,10 +78,8 @@ function NFTCard({ description, image, name, price }: any) {
           </div>
         </div>
       </div>
-      {/* <div className = {`absolute w-full h-[2rem] bottom-0 left-0 bg-[#0000ff]`}></div> */}
     </div>
-    // </Link>
   );
 }
 
-export default NFTCard;
+export default AssetCard;

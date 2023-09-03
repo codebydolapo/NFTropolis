@@ -13,8 +13,10 @@ import { CropIcon, ZoomInIcon, DeleteIcon, Rotate3dIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { activateEditorPopup, deactivateEditorPopup } from "../reducers/action";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { CheckIcon } from "lucide-react";
 import { Button } from "@mui/material";
 //  import { Button } from "@mui/material";
+import { toast } from "react-hot-toast";
 
 const ORIENTATION_TO_ANGLE = {
   3: 180,
@@ -58,6 +60,20 @@ const Index = ({ classes }) => {
     setCroppedImage(null);
   }, []);
 
+  const dispatch = useDispatch();
+
+  const editState = useSelector((state) => {
+    return state.imageEditorPopupState;
+  });
+
+  const imagePath = useSelector((state) => {
+    return state.editedImage;
+  });
+
+  const selectedImage = useSelector((state) => {
+    return state.imageToBeEdited;
+  });
+
   const onFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -78,20 +94,13 @@ const Index = ({ classes }) => {
     }
   };
 
-  const dispatch = useDispatch();
-
-  const editState = useSelector((state) => {
-    return state.imageEditorPopupState;
-  });
-
-  const selectedImage = useSelector((state) => {
-    return state.imageToBeEdited;
-  });
-
   function flipEditState() {
     editState
       ? (() => {
           dispatch(deactivateEditorPopup());
+          if (imageSrc || imagePath) {
+            toast("Finalized!");
+          }
         })()
       : (() => {
           dispatch(activateEditorPopup());
@@ -114,24 +123,19 @@ const Index = ({ classes }) => {
 
   return (
     <div className={`relative  flex-col items-center justify-center`}>
-      {/* <DeleteIcon
-        className={`text-[#fff] cursor-pointer my-2`}
-        onClick={flipEditState}
-      /> */}
-      {/* <CancelIcon className={`text-white`} /> */}
       <Button
-                variant="contained"
-                endIcon={<CancelIcon />}
-                className={`bg-[#000]`}
-                onClick={flipEditState}
-              >
-                Go Back
-              </Button>
-      {imageSrc ? (
+        variant="contained"
+        endIcon={imageSrc || imagePath ? <CheckIcon /> : <CancelIcon />}
+        className={`bg-[#000]`}
+        onClick={flipEditState}
+      >
+        {imageSrc || imagePath ? "Finalize" : "Go Back"}
+      </Button>
+      {imageSrc || imagePath ? (
         <React.Fragment>
           <div className={classes.cropContainer}>
             <Cropper
-              image={imageSrc}
+              image={imageSrc || imagePath}
               crop={crop}
               rotation={rotation}
               zoom={zoom}
@@ -211,8 +215,9 @@ const Index = ({ classes }) => {
           <ImgDialog img={croppedImage} onClose={onClose} />
         </React.Fragment>
       ) : (
-        <div className={`w-full h-[10rem] cursor-pointer flex items-center justify-center`}>
-
+        <div
+          className={`w-full h-[10rem] cursor-pointer flex items-center justify-center`}
+        >
           <input
             type="file"
             onChange={onFileChange}

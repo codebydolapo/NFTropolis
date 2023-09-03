@@ -23,6 +23,7 @@ function ImageEditModal() {
   //       })();
   // }
 
+
   return (
     <div
       className={`w-[100vw] bg-[#000] absolute xs:top-[50px] flex items-center justify-center m-auto top-0 bottom-0 left-0 right-0 ${styles.editorContainer}`}
