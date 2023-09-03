@@ -10,6 +10,9 @@ import { DeleteIcon } from "lucide-react";
 import Slide from "@material-ui/core/Slide";
 import CheckIcon from "@mui/icons-material/Check";
 import { Button } from "@mui/material";
+import { saveImage } from "../reducers/action";
+// import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 
 const styles = {
   appBar: {
@@ -50,7 +53,9 @@ class ImgDialog extends React.Component {
   };
 
   render() {
+    const { dispatch } = this.props;
     const { classes } = this.props;
+
     return (
       <Dialog
         fullScreen
@@ -80,8 +85,11 @@ class ImgDialog extends React.Component {
                 variant="contained"
                 endIcon={<CheckIcon />}
                 className={`bg-[#0080FF]`}
+                onClick={() => {
+                  dispatch(saveImage(this.props.img));
+                }}
               >
-                Upload
+                Done
               </Button>
             </Toolbar>
           </AppBar>
@@ -97,4 +105,9 @@ class ImgDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(ImgDialog);
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
+export default withStyles(styles)(connect(mapDispatchToProps)(ImgDialog));
+// export default withStyles(styles)(ImgDialog);

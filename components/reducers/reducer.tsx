@@ -73,14 +73,14 @@ export const imageEditorPopupState = (state = false, action: {type: string}) =>{
     }
 }
 
-export const imageToBeEdited = (state = "false", action: {type: string; image: string}) =>{
-    switch(action.type){
-        case "SAVE_IMAGE":
-            return action.image
-        default:
-            return state
-    }
-}
+// export const imageToBeEdited = (state = "false", action: {type: string; image: string}) =>{
+//     switch(action.type){
+//         case "SAVE_IMAGE":
+//             return action.image
+//         default:
+//             return state
+//     }
+// }
 
 export const NFTData = (state = [], action: {data: Metadata | never[], type: string})=>{
         
@@ -101,14 +101,26 @@ export const Window = (state = null, action: {Window: any, type: string})=>{
     }
 }
 
+export const editedImage = (state = "", action: {type: string; image: string}) =>{
+    console.log(action.image)
+        switch(action.type){
+            case "SAVE_IMAGE":
+                return action.image
+            default:
+                return state
+        }
+    }
+
+
 export const allReducers = combineReducers({
     itemData,
     account,
     marketplaceContract,
     checkoutPopupState,
     imageEditorPopupState,
-    imageToBeEdited,
+    // imageToBeEdited,
     NFTData,
     Window,
-    hamburgerState
+    hamburgerState,
+    editedImage
 })

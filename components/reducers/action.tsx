@@ -42,7 +42,6 @@ export const saveMarketplaceContract = (contractInstance: undefined | any)=>{
     }
 }
 
-
 export const activateCheckoutPopup = ()=>{
     return{
         type: "ACTIVATE_POPUP",
@@ -66,12 +65,12 @@ export const deactivateEditorPopup = ()=>{
     }
 }
 
-export const saveImage = (image: string)=>{
-    return{
-        type: "SAVE_IMAGE",
-        image
-    }
-}
+// export const saveImage = (image: string)=>{
+//     return{
+//         type: "SAVE_IMAGE",
+//         image
+//     }
+// }
 
 export const saveNFTData = (data: Metadata)=>{
     return {
@@ -84,5 +83,12 @@ export const saveWindow = (Window: any)=>{
     return{
         type: "SAVE_WINDOW",
         Window
+    }
+}
+
+export const saveImage = (image: string)=>{
+    return{
+        type: "SAVE_IMAGE",
+        image
     }
 }

@@ -3,6 +3,9 @@ import { useState } from "react";
 // import Dropzone from 'react-dropzone'
 import { useSelector, useDispatch } from "react-redux";
 import { deactivateEditorPopup, activateEditorPopup } from "./reducers/action";
+import CheckIcon from "@mui/icons-material/Check";
+import { Button } from "@mui/material";
+import { EditIcon } from "lucide-react";
 
 function CreateBody() {
   const dispatch = useDispatch();
@@ -106,6 +109,17 @@ function CreateBody() {
                 type="text"
                 placeholder="Provide a detailed description of your item"
               />
+            </div>
+            <div
+              className={`md:w-[10rem] md:h-[5rem] rounded-lg my-3 px-2 flex items-start, justify-around flex-col xs:w-[10rem] xs:h-[7rem]`}
+            >
+              <Button
+                variant="contained"
+                endIcon={<EditIcon />}
+                className={`bg-[#0080FF]`}
+              >
+                Create
+              </Button>
             </div>
           </div>
         </div>
