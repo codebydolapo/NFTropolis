@@ -90,18 +90,18 @@ function CreateBody() {
                 <div
                   className={`md:w-[25rem] md:h-[15rem] flex flex-col items-center justify-center my-[0.25rem] rounded-lg text-white text-sm xs:w-[98vw] xs:h-[98vw] cursor-pointer relative`}
                 >
-                  <img className={`max-w-[98%] max-h-[98%]`} src={imagePath} />
+                  <img className={`max-w-[98%] h-auto w-auto max-h-[98%]`} src={imagePath} />
                   <div
-                    className={`absolute top-0 right-0 w-[5rem] h-[2.5rem] flex items-center justify-around`}
+                    className={`absolute top-0 right-0 w-[4rem] h-[2.5rem] flex items-center justify-around`}
                   >
                     <div
-                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-[1px] border-white`}
+                      className={` bg-black rounded-full w-[1.5rem] h-[1.5rem] flex items-center justify-center border-[1px] border-white`}
                       onClick={flipEditState}
                     >
                       <Pencil />
                     </div>
                     <div
-                      className={` bg-black rounded-full w-[2rem] h-[2rem] flex items-center justify-center border-[1px] border-white`}
+                      className={` bg-black rounded-full w-[1.5rem] h-[1.5rem] flex items-center justify-center border-[1px] border-white`}
                       onClick={handleDelete}
                     >
                       <Trash />
