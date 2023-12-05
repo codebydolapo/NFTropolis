@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   BookmarkIcon,
   HomeIcon,
+  LockClosedIcon,
   BriefcaseIcon,
   CogIcon,
   MicrophoneIcon,
@@ -64,6 +65,12 @@ function Menu() {
               <h1>Home</h1>
             </div>
           </Link>
+          <Link href="/list">
+            <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
+              <ViewListIcon className={styles.ChevronUpIcon} />
+              <h1>List/Sell</h1>
+            </div>
+          </Link>
           {/* <Link onClick = {handleRefresh}> */}
             <div className={`${styles.menuDiv}`} onClick={handleAssetsLinking}>
               <PhotographIcon className={styles.ChevronUpIcon} />
@@ -72,14 +79,9 @@ function Menu() {
           {/* </Link> */}
           <Link href="/create">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
-              <PencilAltIcon className={styles.ChevronUpIcon} />
+              <LockClosedIcon className={styles.ChevronUpIcon} />
+              {/* <PencilAltIcon className={styles.ChevronUpIcon} /> */}
               <h1>Create</h1>
-            </div>
-          </Link>
-          <Link href="/#skills">
-            <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
-              <ViewListIcon className={styles.ChevronUpIcon} />
-              <h1>List/Sell</h1>
             </div>
           </Link>
           <Link href="/#blog">

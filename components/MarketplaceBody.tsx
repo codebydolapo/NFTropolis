@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import NFTCard from "./NFTCard";
 import Checkout from "./Checkout";
 import { urlFor } from "../sanity/sanity.config";
+import { Nft, BaseNft } from "alchemy-sdk";
+// import { Nft, BaseNft} from "alchemy-sdk";
+import useFetchPrice from "./utils/useFetchPrice";
 
 
 function MarketplaceBody() {
-  const [NFTs, setNFTs] = useState<any>([]);
+  const [NFTs, setNFTs] = useState<Nft[]>([]);
 
   const checkoutPopupState = useSelector(
     (state: { checkoutPopupState: boolean }) => {
@@ -15,7 +18,8 @@ function MarketplaceBody() {
     }
   );
 
-  const NFTData = useSelector((state: {NFTData: Metadata}) => {return state.NFTData});
+
+  const NFTData = useSelector((state: { NFTData: Nft[] }) => { return state.NFTData });
 
   useEffect(() => {
     setNFTs(NFTData);
@@ -112,16 +116,20 @@ function MarketplaceBody() {
               className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around md:px-5 xs:w-[100%] ${styles.itemsContainer}`}
             >
               {
-              // !checkoutPopupState &&
-                NFTs.map(({ description, image, name, price }: Metadata) => {
+                // !checkoutPopupState &&
+                NFTs.map(({ description, raw, name, contract, tokenId, image }: Nft | any) => {
+                  // NFTs.map(({ description, name, priceToSell, external_url, chain }: NFT) => {
                   return (
                     <NFTCard
-                      description={description?.children.text}
-                      image={urlFor(image?.asset._ref)}
+                      description={description}
+                      tokenUri={raw.tokenUri}
                       name={name}
-                      key={image}
-                      // index={index}
-                      price={price}
+                      key={raw.tokenUri}
+                      contract={contract}
+                      tokenId={tokenId}
+                      image={image}
+                      raw={raw}
+                      timeLastUpdated={""}
                     />
                   );
                 })}

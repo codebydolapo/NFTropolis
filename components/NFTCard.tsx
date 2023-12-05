@@ -5,11 +5,14 @@ import { activateCheckoutPopup } from "./reducers/action";
 import { addItem } from "./reducers/action";
 import { useEffect, useState, useMemo } from "react";
 // import getNFTURL from '../utils/getNFTURL';
-import { Matic } from "@web3uikit/icons";
+import { Matic, EthColored } from "@web3uikit/icons";
 import { useAccount } from "wagmi";
 import CheckIcon from "@mui/icons-material/Check";
 import { Button } from "@mui/material";
 import toast from 'react-hot-toast';
+import { universalSignatureValidatorAbi } from "viem/dist/types/constants/abis";
+import { BaseNft, Nft } from "alchemy-sdk";
+import useFetchPrice from "./utils/useFetchPrice";
 
 interface Collection {
   description: string;
@@ -21,33 +24,41 @@ interface Collection {
   // listingStatus: any
 }
 
-function NFTCard({ description, image, name, price }: any) {
+function NFTCard({ description, tokenUri, name, tokenId, contract }: Nft | any) {
   const dispatch = useDispatch();
 
-  const { address, isConnected } = useAccount();
+  const[price, setPrice] = useState("")
+
+  const { isConnected } = useAccount();
+
+
+
+  const {listing, listingRefetch} = useFetchPrice(contract.address, tokenId)
+  async function handleListingFetch(){
+    await listingRefetch?.()
+  }
+
+  useEffect(()=>{
+    handleListingFetch()
+    console.log(listing)
+    setPrice(listing?.price)
+  }, [])
+
 
   function handleCheckout() {
     if (isConnected) {
       dispatch(activateCheckoutPopup());
-    //   dispatch(
-    //     addItem({
-    //       image,
-    //       name,
-    //       // index,
-    //       price,
-    //       description,
-    //     })
-    //   );
     } else {
       toast.error("Please connect your wallet");
     }
   }
 
-  function truncateString(str: string, length: number) {
-    if (str.length <= length) {
+  function truncateString(length: number, str?: any ): string | undefined {
+    if (str?.length <= length) {
       return str; // No truncation needed
-    } else {
-      return str.slice(0, length) + "..."; // Truncate and add ellipsis
+    } 
+    else {
+      return str?.slice(0, length) + "..."; // Truncate and add ellipsis
     }
   }
 
@@ -62,7 +73,7 @@ function NFTCard({ description, image, name, price }: any) {
         <img
           className={`rounded-tl-xl rounded-tr-xl md:w-auto md:h-full xs:w-full xs:h-auto ${styles.image}`}
           alt=""
-          src={image}
+          src={tokenUri}
         />
       </div>
       <div
@@ -77,7 +88,7 @@ function NFTCard({ description, image, name, price }: any) {
           className={`w-full md:h-[40%] px-3 flex flex-col items-start justify-center xs:h-[50%]`}
         >
           <h3 className={`md:text-sm text-[#000000e7] xs:text-xs `}>
-            {truncateString(description, 95)}
+            {truncateString(95, description)}
           </h3>
         </div>
         <div
@@ -97,7 +108,9 @@ function NFTCard({ description, image, name, price }: any) {
             >
               {price ? price : 0}
             </h3>
-            <Matic fontSize={"1rem"} />
+           {/* {chain.toLowerCase() == "polygon" ?? <Matic fontSize={"1rem"} />}
+           {chain.toLowerCase() == "ethereum" ?? <EthColored fontSize={"1rem"} />} */}
+           <Matic fontSize={"1rem"} />
           </div>
         </div>
       </div>

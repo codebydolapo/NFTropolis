@@ -89,6 +89,10 @@ module.exports = {
       xl: "1025px",
       xxl: "1201px",
     },
+    animation: {
+      'bounce': 'bounce 500ms ease 2',
+      "fade": "fade 500ms ease-out 2"
+    },
     extend: {
       fontFamily: {
         poppins: ["poppins", 'sans-serif'],
@@ -99,5 +103,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
 }

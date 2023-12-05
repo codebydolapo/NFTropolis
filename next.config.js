@@ -7,6 +7,7 @@ const nextConfig = {
   env: {
     WALLET_CONNECT_PROJECT_ID : process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
     ALCHEMY_API_KEY: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
+    MORALIS_API_KEY: process.env.NEXT_PUBLIC_MORALIS_API_KEY
   },
 }
 

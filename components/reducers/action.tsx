@@ -1,3 +1,5 @@
+import { Nft } from "alchemy-sdk"
+
 interface Item{
     name: string,
     description: string,
@@ -14,7 +16,7 @@ export const deactivateHamburger = () => {
     return { type: "HAMBURGER_INACTIVE" }
 }
 
-export const addItem = (item: Metadata)=>{
+export const addItem = (item: NFT)=>{
     return{
         type: "SET_ITEM",
         item
@@ -53,6 +55,7 @@ export const deactivateCheckoutPopup = ()=>{
         type: "DEACTIVATE_POPUP"
     }
 }
+
 export const activateEditorPopup = ()=>{
     return{
         type: "ACTIVATE_EDITOR_POPUP",
@@ -65,30 +68,25 @@ export const deactivateEditorPopup = ()=>{
     }
 }
 
-// export const saveImage = (image: string)=>{
-//     return{
-//         type: "SAVE_IMAGE",
-//         image
-//     }
-// }
 
-export const saveNFTData = (data: Metadata)=>{
+export const saveNFTData = (data: Nft[])=>{
     return {
         type: "SAVE_DATA",
         data
     }
 }
 
-export const saveWindow = (Window: any)=>{
+
+export const saveFile = (file: string)=>{
     return{
-        type: "SAVE_WINDOW",
-        Window
+        type: "SAVE_IMAGE",
+        file
     }
 }
 
-export const saveImage = (image: string)=>{
+export const saveFilePath = (filePath: string)=>{
     return{
-        type: "SAVE_IMAGE",
-        image
+        type: "SAVE_IMAGE_PATH",
+        filePath
     }
 }

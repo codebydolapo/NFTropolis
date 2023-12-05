@@ -1,8 +1,7 @@
 import { combineReducers } from "redux"
-// import { Marketplace } from '../../typechain-types/contracts/Marketplace'
-// import { Minter } from '../../typechain-types/contracts/Minter'
+import { Nft } from "alchemy-sdk"
 
-interface Actions{
+interface Actions {
     type: string,
     item: {
         name: string,
@@ -13,19 +12,19 @@ interface Actions{
     }
 }
 
-const hamburgerState = (state = false, action: {type: string})=>{
-    switch(action.type){
+const hamburgerState = (state = false, action: { type: string }) => {
+    switch (action.type) {
         case "HAMBURGER_ACTIVE":
-            return state= true;
+            return state = true;
         case "HAMBURGER_INACTIVE":
-            return state=false;
+            return state = false;
         default:
             return false
     }
 }
 
-export const itemData  = (state = {}, action: Actions)=>{
-    switch(action.type){
+export const itemData = (state = {}, action: Actions) => {
+    switch (action.type) {
         case "SET_ITEM":
             return action.item
         default:
@@ -33,27 +32,9 @@ export const itemData  = (state = {}, action: Actions)=>{
     }
 }
 
-export const account = (state = "", action: {type: string, account: any} )=>{
-    switch(action.type){
-        case "SAVE_ACCOUNT":
-            return state = action.account
-        default:
-            return state
-    }
-}
 
-export const marketplaceContract= (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
-    // console.log(action.contractInstance)
-    switch(action.type){
-        case "SAVE_MARKETPLACE_CONTRACT":
-            return state = action.contractInstance;
-        default:
-            return state
-    }
-}
-
-export const checkoutPopupState = (state = false, action: {type: string}) =>{
-    switch(action.type){
+export const checkoutPopupState = (state = false, action: { type: string }) => {
+    switch (action.type) {
         case "ACTIVATE_POPUP":
             return true
         case "DEACTIVATE_POPUP":
@@ -62,8 +43,8 @@ export const checkoutPopupState = (state = false, action: {type: string}) =>{
             return state
     }
 }
-export const imageEditorPopupState = (state = false, action: {type: string}) =>{
-    switch(action.type){
+export const imageEditorPopupState = (state = false, action: { type: string }) => {
+    switch (action.type) {
         case "ACTIVATE_EDITOR_POPUP":
             return true
         case "DEACTIVATE_EDITOR_POPUP":
@@ -73,18 +54,9 @@ export const imageEditorPopupState = (state = false, action: {type: string}) =>{
     }
 }
 
-// export const imageToBeEdited = (state = "false", action: {type: string; image: string}) =>{
-//     switch(action.type){
-//         case "SAVE_IMAGE":
-//             return action.image
-//         default:
-//             return state
-//     }
-// }
+export const NFTData = (state = [], action: {type: string; data: Nft[]}) => {
 
-export const NFTData = (state = [], action: {data: Metadata | never[], type: string})=>{
-        
-    switch(action.type){
+    switch (action.type) {
         case "SAVE_DATA":
             return action.data
         default:
@@ -92,35 +64,34 @@ export const NFTData = (state = [], action: {data: Metadata | never[], type: str
     }
 }
 
-export const Window = (state = null, action: {Window: any, type: string})=>{
-    switch (action.type){
-        case "SAVE_WINDOW":
-            return action.Window;
+export const file = (state = "", action: { type: string; file: string }) => {
+    switch (action.type) {
+        case "SAVE_IMAGE":
+            console.log(action.file)
+            return action.file
         default:
             return state
     }
 }
 
-export const editedImage = (state = "", action: {type: string; image: string}) =>{
-    console.log(action.image)
-        switch(action.type){
-            case "SAVE_IMAGE":
-                return action.image
-            default:
-                return state
-        }
+export const filePath = (state = "", action: { type: string; filePath: string }) => {
+    switch (action.type) {
+        case "SAVE_IMAGE_PATH":
+            console.log(action.filePath)
+            return action.filePath
+        default:
+            return state
     }
+}
+
 
 
 export const allReducers = combineReducers({
     itemData,
-    account,
-    marketplaceContract,
     checkoutPopupState,
     imageEditorPopupState,
-    // imageToBeEdited,
     NFTData,
-    Window,
     hamburgerState,
-    editedImage
+    file,
+    filePath
 })
