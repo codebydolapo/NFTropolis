@@ -12,6 +12,7 @@ import _storeListings from '../../backend/_storeListings'
 require("dotenv").config()
 // Importing the required modules
 import { Network, Alchemy, AlchemySettings } from "alchemy-sdk"
+import { nfTropolisAddress } from "../../src/nfTropolisAddress";
 
 
 
@@ -24,7 +25,7 @@ const useListItem = () => {
     const [tokenId, setNFTId] = useState("");
     const [price, setPrice] = useState(0);
     const [externalLink, setExternalLink] = useState("test")
-    const [address, setAddress] = useState('0x7F0abf089b143a04BEeb5038252429E746cB9754')
+    const [address, setAddress] = useState(nfTropolisAddress)
     const [_chain, setChain] = useState('Polygon');
 
     const priceRef = useRef<string | number>("");
@@ -72,8 +73,8 @@ const useListItem = () => {
     const { data: listData,
         isLoading: isListingLoading,
         isSuccess: isListingSuccess,
-        // writeAsync: listNFT,
-        write: listNFT,
+        writeAsync: listNFT,
+        // write: listNFT,
         status: listStatus,
 
     } = useContractWrite(listingConfig);
@@ -91,11 +92,12 @@ const useListItem = () => {
         })
 
     async function listItem() {
+        await listNFT?.()
 
-        if (!customerAddress) {
-            toast.error("Please connect your wallet!");
-            return;
-        }
+        // if (!customerAddress) {
+        //     toast.error("Please connect your wallet!");
+        //     return;
+        // }
 
         try {
             await listNFT?.()

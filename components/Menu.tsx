@@ -14,6 +14,8 @@ import {
   CashIcon,
   PencilAltIcon,
   ViewListIcon,
+  OfficeBuildingIcon,
+  CreditCardIcon
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -84,10 +86,10 @@ function Menu() {
               <h1>Create</h1>
             </div>
           </Link>
-          <Link href="/#blog">
+          <Link href="/faucet">
             <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
-              <BookmarkIcon className={styles.ChevronUpIcon} />
-              <h1>Blog</h1>
+              <CreditCardIcon className={styles.ChevronUpIcon} />
+              <h1>Faucet</h1>
             </div>
           </Link>
           <Link href="">

@@ -11,15 +11,18 @@ import { usePrepareContractWrite, useContractWrite, useAccount, useContractRead,
 import { Eth, Matic, Avax } from "@web3uikit/icons";
 import _handleCreate from "../backend/_handleCreate"
 // import createItem from "./utils/CreateItemFunction";
-import _useCreateAndList from "./utils/_useCreateAndList";
+import useUploadItem from "./utils/useUploadItem";
 import useCollectData from "./utils/useCollectData";
+import { nfTropolisAddress } from "../src/nfTropolisAddress";
+import { useState } from "react";
+
 
 
 function CreateBody() {
 
   const { address } = useAccount();
 
-  const {createItem} = _useCreateAndList();
+  const {uploadItem} = useUploadItem();
   const {
     priceRef,
     file,
@@ -29,6 +32,7 @@ function CreateBody() {
     description, 
     name, 
     price,
+    tokenId,
     externalLink,
     flipEditState,
     handleChainChange,
@@ -38,6 +42,7 @@ function CreateBody() {
     handleListingStatus,
     handleNameUpdate,
     handlePriceUpdate,
+    handleTokenIdUpdate,
     handleImageRemove
 } = useCollectData()
 
@@ -142,6 +147,30 @@ function CreateBody() {
               />
             </div>
             <div
+                  className={`md:w-[90%] md:h-[10rem] rounded-lg px-2 flex items-start justify-around flex-col xs:w-[100%] xs:h-[10rem] animation-all transition-[500ms]`}
+                >
+                  <div className={`w-[100%] h-full flex items-center justify-start `}>
+                    <h1
+                      className={`text-white text-lg font-extrabold`}
+                    >
+                      tokenId
+                    </h1>
+                  </div>
+                  <p
+                    className={`text-white text-[0.8rem] font-[500] md:my-[0.3rem]`}
+                  >
+                    State the token ID of your NFT
+                  </p>
+                  <input
+                    className={`w-[98%] h-[7rem] rounded-lg border-[1px] border-[white] md:mb-3 bg-inherit outline-none px-2 text-sm text-white `}
+                    type="Number"
+                    placeholder="Token Id"
+                    value={tokenId}
+                    onChange={handleTokenIdUpdate}
+                  />
+                </div>
+
+            <div
               className={`md:w-[90%] md:h-[3rem] rounded-lg my-3 px-2 flex items-start justify-around flex-col xs:w-[100%] xs:h-[5rem]`}
             >
               <FormGroup>
@@ -154,7 +183,7 @@ function CreateBody() {
                   className={`text-white text-lg font-extrabold`} />
               </FormGroup>
             </div>
-            {listingStatus &&
+            {/* {listingStatus &&
               <>
                 <div
                   className={`md:w-[90%] md:h-[10rem] rounded-lg px-2 flex items-start justify-around flex-col xs:w-[100%] xs:h-[10rem] animation-all transition-[500ms]`}
@@ -216,7 +245,7 @@ function CreateBody() {
                 </div>
               </>
 
-            }
+            } */}
             <div
               className={`md:w-[10rem] md:h-[5rem] rounded-lg my-3 px-2 flex items-start, justify-around flex-col xs:w-[10rem] xs:h-[7rem]`}
             >
@@ -226,7 +255,7 @@ function CreateBody() {
                 className={`bg-[#0080FF] capitalize text-base`}
                 // onClick={() => handleCreate(imagePath, name, description)}
                 // onClick={() => handleCreate(file, name, description)}
-                onClick={() => createItem({ file, name, description, chain, price, externalLink, address, listingStatus })}
+                onClick={() => uploadItem({ file, name, description, externalLink, tokenId})}
               >
                 Create
               </Button>

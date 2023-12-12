@@ -5,18 +5,23 @@ import marketplaceABI from "../../artifacts/contracts/Marketplace.sol/Marketplac
 import _handleCreate from "../../backend/_handleCreate" //this function handles the firebase storage
 import _storeListings from '../../backend/_storeListings'
 require("dotenv").config()
+import { nfTropolisAddress } from "../../src/nfTropolisAddress";
 
 
-
-const useFetchPrice = (address: string, tokenId: string | number) => {
+const useFetchPrice = (address: string, tokenId: string | number): {
+  // Specify the types of values returned
+  // data: {price: string, seller: string};
+  listing: {price: string, seller: string} | any;
+  listingRefetch: () => void | any;
+}=> {
 
     //this helps me count the number of NFTs listed inside the contract
   const {
     data: listing,
-    // isError: countErrorState,
-    // isFetching: countFetchingState,
-    isLoading: listingLoadingState,
-    isSuccess: listingSuccess,
+    isError,
+    isFetching,
+    isLoading,
+    isSuccess,
     refetch: listingRefetch
   } =
     useContractRead({
@@ -28,8 +33,9 @@ const useFetchPrice = (address: string, tokenId: string | number) => {
 
     
     return {
-        listing,
-        listingRefetch
+      // data: listing as Listing | null, // Cast response to expected type
+      listing,
+      listingRefetch,
     }
 
 

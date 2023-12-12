@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/items.module.css";
-import { activateCheckoutPopup } from "./reducers/action";
+import { activateCheckoutPopup, saveCheckoutData } from "./reducers/action";
 import { addItem } from "./reducers/action";
 import { useEffect, useState, useMemo } from "react";
 // import getNFTURL from '../utils/getNFTURL';
@@ -10,53 +10,60 @@ import { useAccount } from "wagmi";
 import CheckIcon from "@mui/icons-material/Check";
 import { Button } from "@mui/material";
 import toast from 'react-hot-toast';
-import { universalSignatureValidatorAbi } from "viem/dist/types/constants/abis";
-import { BaseNft, Nft } from "alchemy-sdk";
+import { Nft } from "alchemy-sdk";
 import useFetchPrice from "./utils/useFetchPrice";
+import { ethers } from "ethers";
 
-interface Collection {
-  description: string;
-  image: any;
-  name: string;
-  index: string;
-  price: string;
-  isOwned: boolean;
-  // listingStatus: any
-}
 
-function NFTCard({ description, tokenUri, name, tokenId, contract }: Nft | any) {
+
+function NFTCard({ description, name, tokenId, contract, image, raw, timeLastUpdated, twitter, deployer, collectionName }: Nft | any) {
   const dispatch = useDispatch();
 
-  const[price, setPrice] = useState("")
+  const [price, setPrice] = useState<string | number>(0)
 
   const { isConnected } = useAccount();
 
 
 
-  const {listing, listingRefetch} = useFetchPrice(contract.address, tokenId)
-  async function handleListingFetch(){
-    await listingRefetch?.()
-  }
+  const { listing, listingRefetch } = useFetchPrice(contract.address, tokenId)
 
-  useEffect(()=>{
-    handleListingFetch()
+
+  useEffect(() => {
+    listingRefetch?.()
     console.log(listing)
-    setPrice(listing?.price)
-  }, [])
+    setPrice(ethers.utils.formatEther(listing.price))
+  }, [listing])
+
+
 
 
   function handleCheckout() {
     if (isConnected) {
       dispatch(activateCheckoutPopup());
+      dispatch(saveCheckoutData({
+        description, 
+        name, 
+        tokenId, 
+        contract, 
+        image, 
+        raw, 
+        timeLastUpdated, 
+        twitter, 
+        deployer,
+        price,
+        owner: listing.seller,
+        collectionName
+      }))
+
     } else {
       toast.error("Please connect your wallet");
     }
   }
 
-  function truncateString(length: number, str?: any ): string | undefined {
+  function truncateString(length: number, str?: any): string | undefined {
     if (str?.length <= length) {
       return str; // No truncation needed
-    } 
+    }
     else {
       return str?.slice(0, length) + "..."; // Truncate and add ellipsis
     }
@@ -73,7 +80,7 @@ function NFTCard({ description, tokenUri, name, tokenId, contract }: Nft | any) 
         <img
           className={`rounded-tl-xl rounded-tr-xl md:w-auto md:h-full xs:w-full xs:h-auto ${styles.image}`}
           alt=""
-          src={tokenUri}
+          src={image}
         />
       </div>
       <div
@@ -98,7 +105,7 @@ function NFTCard({ description, tokenUri, name, tokenId, contract }: Nft | any) 
             {/* <div className={`w-[7rem] h-[2rem] rounded-md bg-[#00ff00] flex items-center justify-center`}>
                                 <p className={`text-sm text-white`}>Available</p>
                             </div> */}
-            <Button variant="contained" endIcon={<CheckIcon />} className = {`bg-[#0080FF]`}>
+            <Button variant="contained" endIcon={<CheckIcon />} className={`bg-[#0080FF]`}>
               Available
             </Button>
           </div>
@@ -108,9 +115,9 @@ function NFTCard({ description, tokenUri, name, tokenId, contract }: Nft | any) 
             >
               {price ? price : 0}
             </h3>
-           {/* {chain.toLowerCase() == "polygon" ?? <Matic fontSize={"1rem"} />}
+            {/* {chain.toLowerCase() == "polygon" ?? <Matic fontSize={"1rem"} />}
            {chain.toLowerCase() == "ethereum" ?? <EthColored fontSize={"1rem"} />} */}
-           <Matic fontSize={"1rem"} />
+            <Matic fontSize={"1rem"} />
           </div>
         </div>
       </div>

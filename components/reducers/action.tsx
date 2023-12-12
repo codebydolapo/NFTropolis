@@ -90,3 +90,10 @@ export const saveFilePath = (filePath: string)=>{
         filePath
     }
 }
+
+export const saveCheckoutData = (checkoutData: any)=>{
+    return{
+        type: "SAVE_CHECKOUT_DATA",
+        checkoutData
+    }
+}

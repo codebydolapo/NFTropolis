@@ -36,7 +36,7 @@ async function main() {
       await marketplace.deployed();
 
       // const account = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-      const [account] = await ethers.getSigners();
+      const [owner, customer] = await ethers.getSigners();
 
       fs.writeFileSync(
         "src/marketplaceAddress.js",
@@ -51,12 +51,25 @@ async function main() {
       console.log("-------------------------------------------------");
       console.log("minting and listing NFTs");
 
-      await nfTropolis.mintNFT({ value: PRICE });
-      await nfTropolis.setApprovalForAll(marketplace.address, true);
+      for (let i = 1; i <= 15; i++) {
+
+        const tx = await nfTropolis.mintNFT({ value: PRICE });
+        await nfTropolis.setApprovalForAll(marketplace.address, true);
+
+        console.log("-------------------------------------------------");
+        console.log(`NFT ${i} minted to deployer with hash ${tx.hash}`);
+
+        await marketplace.listItem(nfTropolis.address, i, PRICE)
+
+        console.log("-------------------------------------------------");
+        console.log(`NFT ${i} listed by deployer on marketplace with hash ${tx.hash}`);
+
+
+      }
 
       console.log("-------------------------------------------------");
       console.log("minted and listed!");
-      
+
     } catch (error) {
       console.log("--------------------------------------------------");
       console.log("Operation failed!");

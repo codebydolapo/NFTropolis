@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import NFTCard from "./NFTCard";
 import Checkout from "./Checkout";
-import { urlFor } from "../sanity/sanity.config";
 import { Nft, BaseNft } from "alchemy-sdk";
 // import { Nft, BaseNft} from "alchemy-sdk";
 import useFetchPrice from "./utils/useFetchPrice";
@@ -117,21 +116,26 @@ function MarketplaceBody() {
             >
               {
                 // !checkoutPopupState &&
-                NFTs.map(({ description, raw, name, contract, tokenId, image }: Nft | any) => {
-                  // NFTs.map(({ description, name, priceToSell, external_url, chain }: NFT) => {
-                  return (
-                    <NFTCard
-                      description={description}
-                      tokenUri={raw.tokenUri}
-                      name={name}
-                      key={raw.tokenUri}
-                      contract={contract}
-                      tokenId={tokenId}
-                      image={image}
-                      raw={raw}
-                      timeLastUpdated={""}
-                    />
-                  );
+                NFTs.map(({ description, raw, contract, contractMetadata, title, id, contractDeployer}: Nft | any, index) => {
+                  // if (index > 6) {
+                    return (
+                      <NFTCard
+                        description={description}
+                        // tokenUri={raw.tokenUri}
+                        name={title}
+                        key={contractMetadata.openSea.imageUrl}
+                        contract={contract}
+                        // tokenId={tokenId}
+                        image={contractMetadata.openSea.imageUrl}
+                        raw={raw}
+                        timeLastUpdated={""}
+                        tokenId = {id.tokenId}
+                        twitter = {contractMetadata.openSea.twitterUsername}
+                        deployer = {contractDeployer}
+                        collectionName = {contractMetadata.openSea.collectionName}
+                      />
+                    );
+                  // }
                 })}
             </div>
           </div>

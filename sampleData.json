@@ -1,0 +1,632 @@
+[
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Mr Toaster Head+1",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Dude with a fiery looking toaster thing for a head. Also looks like a commando",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/1",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF4-r-ahWwAAIJZO.png66fa95cd-6fa3-472c-80fc-10fb5d8c3d8d?alt=media&token=58f8bd25-3429-4dd3-ab93-e6f227010e3c",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Dude with a fiery looking toaster thing for a head. Also looks like a commando",
+        "id": {
+            "tokenId": 1
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/1",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF4-r-ahWwAAIJZO.png66fa95cd-6fa3-472c-80fc-10fb5d8c3d8d?alt=media&token=58f8bd25-3429-4dd3-ab93-e6f227010e3c"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF4-r-ahWwAAIJZO.png66fa95cd-6fa3-472c-80fc-10fb5d8c3d8d?alt=media&token=58f8bd25-3429-4dd3-ab93-e6f227010e3c",
+            "name": "Mr Toaster Head+1"
+        },
+        "title": "Mr Toaster Head 1",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/1"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Mr Zombie+2",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Zombie looking dude with an arm in his mouth. Also appears to have octopi appendages coming out of his head",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/2",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5A5W3sXYAE2NW0.jpg4c1e0036-bfa7-4c38-b8d6-48a9cf8e61c7?alt=media&token=9df3baf2-0c88-4ed2-a0ae-6b5bfd0ab996",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Zombie looking dude with an arm in his mouth. Also appears to have octopi appendages coming out of his head",
+        "id": {
+            "tokenId": 2
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/2",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5A5W3sXYAE2NW0.jpg4c1e0036-bfa7-4c38-b8d6-48a9cf8e61c7?alt=media&token=9df3baf2-0c88-4ed2-a0ae-6b5bfd0ab996"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5A5W3sXYAE2NW0.jpg4c1e0036-bfa7-4c38-b8d6-48a9cf8e61c7?alt=media&token=9df3baf2-0c88-4ed2-a0ae-6b5bfd0ab996",
+            "name": "Mr Zombie+2"
+        },
+        "title": "Mr Zombie 2",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/2"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Ram or Goat+3",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Cyborg ram or goat looking thing with horns and a flower and a robot thingie over his eyes.",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/3",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5geBG2WcAAa1pf.jpga8378f96-e2d9-42d5-9dc4-18312dbfbf98?alt=media&token=15d08190-423e-486c-a399-7c2abd9fa5fe",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Cyborg ram or goat looking thing with horns and a flower and a robot thingie over his eyes.",
+        "id": {
+            "tokenId": 3
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/3",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5geBG2WcAAa1pf.jpga8378f96-e2d9-42d5-9dc4-18312dbfbf98?alt=media&token=15d08190-423e-486c-a399-7c2abd9fa5fe"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5geBG2WcAAa1pf.jpga8378f96-e2d9-42d5-9dc4-18312dbfbf98?alt=media&token=15d08190-423e-486c-a399-7c2abd9fa5fe",
+            "name": "Ram or Goat+3"
+        },
+        "title": "Ram or Goat 3",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/3"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Cool Rabbit+4",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Cool rabbit thing with sunglasses and weird bimetallic incisors. Also has a headband and is posing like a criminal",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/4",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5o-9UCaQAE360k.jpgb3d4633a-3984-460e-aa99-eb811b49f489?alt=media&token=428bd906-508c-4eab-927d-514354c37739",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Cool rabbit thing with sunglasses and weird bimetallic incisors. Also has a headband and is posing like a criminal",
+        "id": {
+            "tokenId": 4
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/4",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5o-9UCaQAE360k.jpgb3d4633a-3984-460e-aa99-eb811b49f489?alt=media&token=428bd906-508c-4eab-927d-514354c37739"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5o-9UCaQAE360k.jpgb3d4633a-3984-460e-aa99-eb811b49f489?alt=media&token=428bd906-508c-4eab-927d-514354c37739",
+            "name": "Cool Rabbit+4"
+        },
+        "title": "Cool Rabbit 4",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/4"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Trollie+5",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Troll looking dude with fangs, and a cool gold-lined robe and a giant battle ax on his back.",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/5",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rdJn8XUAAgSVl.jpg5120caf9-3591-4159-8513-2e30e0a010eb?alt=media&token=096a1bbd-d437-4bfa-b5ce-3b3eb7db7db8",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Troll looking dude with fangs, and a cool gold-lined robe and a giant battle ax on his back.",
+        "id": {
+            "tokenId": 5
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/5",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rdJn8XUAAgSVl.jpg5120caf9-3591-4159-8513-2e30e0a010eb?alt=media&token=096a1bbd-d437-4bfa-b5ce-3b3eb7db7db8"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rdJn8XUAAgSVl.jpg5120caf9-3591-4159-8513-2e30e0a010eb?alt=media&token=096a1bbd-d437-4bfa-b5ce-3b3eb7db7db8",
+            "name": "Trollie+5"
+        },
+        "title": "Trollie 5",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/5"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Elfie+6",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Honestly don't know if he's a troll or an elf, but he doesn't have an ax or tusks. He does have a robe though, as well as pointy ears",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/6",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmiqCXkAA4boI.jpg3a9161d8-040f-4194-9ad9-b75275d2542f?alt=media&token=a85f24cc-cec6-4a9a-a736-15983bad00e6",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Honestly don't know if he's a troll or an elf, but he doesn't have an ax or tusks. He does have a robe though, as well as pointy ears",
+        "id": {
+            "tokenId": 6
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/6",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmiqCXkAA4boI.jpg3a9161d8-040f-4194-9ad9-b75275d2542f?alt=media&token=a85f24cc-cec6-4a9a-a736-15983bad00e6"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmiqCXkAA4boI.jpg3a9161d8-040f-4194-9ad9-b75275d2542f?alt=media&token=a85f24cc-cec6-4a9a-a736-15983bad00e6",
+            "name": "Elfie+6"
+        },
+        "title": "Elfie 6",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/6"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Definitely Irish+7",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "I can't tell if this is racist, but this dude looks Irish. He's got a sword instead of an ax, red hair, and an apple on his head",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/7",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmkXzXUAAaxVJ.jpg9ab735a3-098e-4e1a-9e63-51c8d22c4d06?alt=media&token=be878f69-1231-4452-8624-70618952f58b",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "I can't tell if this is racist, but this dude looks Irish. He's got a sword instead of an ax, red hair, and an apple on his head",
+        "id": {
+            "tokenId": 7
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/7",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmkXzXUAAaxVJ.jpg9ab735a3-098e-4e1a-9e63-51c8d22c4d06?alt=media&token=be878f69-1231-4452-8624-70618952f58b"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5rmkXzXUAAaxVJ.jpg9ab735a3-098e-4e1a-9e63-51c8d22c4d06?alt=media&token=be878f69-1231-4452-8624-70618952f58b",
+            "name": "Definitely Irish+7"
+        },
+        "title": "Definitely Irish 7",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/7"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Cyborg Skeleton+8",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Skeleton, cyborg or robot? I really can't tell. However, I do know that that jacket looks good. That is one sick looking piece of wardrobe",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/8",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5RolEqXsAER-V1.jpg07b51d1d-f0b9-4130-a710-91eadd6b46e2?alt=media&token=7bbb53f1-2d44-416f-8706-666703ff1648",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Skeleton, cyborg or robot? I really can't tell. However, I do know that that jacket looks good. That is one sick looking piece of wardrobe",
+        "id": {
+            "tokenId": 8
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/8",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5RolEqXsAER-V1.jpg07b51d1d-f0b9-4130-a710-91eadd6b46e2?alt=media&token=7bbb53f1-2d44-416f-8706-666703ff1648"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FF5RolEqXsAER-V1.jpg07b51d1d-f0b9-4130-a710-91eadd6b46e2?alt=media&token=7bbb53f1-2d44-416f-8706-666703ff1648",
+            "name": "Cyborg Skeleton+8"
+        },
+        "title": "Cyborg Skeleton 8",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/8"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Sylvie Maybe+9",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Doesn't look the part, but the helm looks a lot like Sylvie's from Marvel's Loki. Also enjoying a cool lollipop",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/9",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjbdUEFBehwiUIAEJ.png00000827-e190-453a-a5c7-3d4edec50a47?alt=media&token=a9381c60-f7be-4e30-9788-4ecccf545dd0",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Doesn't look the part, but the helm looks a lot like Sylvie's from Marvel's Loki. Also enjoying a cool lollipop",
+        "id": {
+            "tokenId": 9
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/9",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjbdUEFBehwiUIAEJ.png00000827-e190-453a-a5c7-3d4edec50a47?alt=media&token=a9381c60-f7be-4e30-9788-4ecccf545dd0"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjbdUEFBehwiUIAEJ.png00000827-e190-453a-a5c7-3d4edec50a47?alt=media&token=a9381c60-f7be-4e30-9788-4ecccf545dd0",
+            "name": "Sylvie Maybe+9"
+        },
+        "title": "Sylvie Maybe 9",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/9"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Bald Rick+10",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "\"Do what you love; Do what you meme\" I have no idea what that \"memes\", but it sounds deep.",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/10",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FJKhut7OJMknuTKN.jpg0d807deb-2b8c-4234-b8b6-363dbdadb40d?alt=media&token=bdc0bed5-57a4-4da4-b2a5-8f3f8ef7649e",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "\"Do what you love; Do what you meme\" I have no idea what that \"memes\", but it sounds deep.",
+        "id": {
+            "tokenId": 10
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/10",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FJKhut7OJMknuTKN.jpg0d807deb-2b8c-4234-b8b6-363dbdadb40d?alt=media&token=bdc0bed5-57a4-4da4-b2a5-8f3f8ef7649e"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FJKhut7OJMknuTKN.jpg0d807deb-2b8c-4234-b8b6-363dbdadb40d?alt=media&token=bdc0bed5-57a4-4da4-b2a5-8f3f8ef7649e",
+            "name": "Bald Rick+10"
+        },
+        "title": "Bald Rick 10",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/10"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "No Cap+11",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "\"NFTs will decide your girlfriend\". Literally no cap. Which is why I'm creating this collection.",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/11",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjnkJOI78gi7WHIOERJF.jpg30e4b214-9b45-4ead-ad43-18af42b410e4?alt=media&token=1217ae57-44f1-4d60-ace6-d70026a73f2f",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "\"NFTs will decide your girlfriend\". Literally no cap. Which is why I'm creating this collection.",
+        "id": {
+            "tokenId": 11
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/11",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjnkJOI78gi7WHIOERJF.jpg30e4b214-9b45-4ead-ad43-18af42b410e4?alt=media&token=1217ae57-44f1-4d60-ace6-d70026a73f2f"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FjnkJOI78gi7WHIOERJF.jpg30e4b214-9b45-4ead-ad43-18af42b410e4?alt=media&token=1217ae57-44f1-4d60-ace6-d70026a73f2f",
+            "name": "No Cap+11"
+        },
+        "title": "No Cap 11",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/11"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Cool Sylvie+12",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Pretty and tough looking. Has Vi from Arcane's type of \"mecha gloves\" could very well beat you up.",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/12",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FKJh-ugU-NUUhfYG.pngd1243a58-c184-4b86-bcd9-f6b994c8a86d?alt=media&token=bc5a792a-2f15-4f65-bc8f-d93a0d5c83e9",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Pretty and tough looking. Has Vi from Arcane's type of \"mecha gloves\" could very well beat you up.",
+        "id": {
+            "tokenId": 12
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/12",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FKJh-ugU-NUUhfYG.pngd1243a58-c184-4b86-bcd9-f6b994c8a86d?alt=media&token=bc5a792a-2f15-4f65-bc8f-d93a0d5c83e9"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FKJh-ugU-NUUhfYG.pngd1243a58-c184-4b86-bcd9-f6b994c8a86d?alt=media&token=bc5a792a-2f15-4f65-bc8f-d93a0d5c83e9",
+            "name": "Cool Sylvie+12"
+        },
+        "title": "Cool Sylvie 12",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/12"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Blonde Sylvie+13",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Blonde Sylvie, variant of some others in this collection. Wearing a fur-coat looking thing and black gloves",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/13",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkjNJHugubJBGYfyv.png0c1ddf48-97bb-43ea-bc6b-682fa924909a?alt=media&token=a478945d-3cfb-47ce-be27-f5a867d8d8cd",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Blonde Sylvie, variant of some others in this collection. Wearing a fur-coat looking thing and black gloves",
+        "id": {
+            "tokenId": 13
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/13",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkjNJHugubJBGYfyv.png0c1ddf48-97bb-43ea-bc6b-682fa924909a?alt=media&token=a478945d-3cfb-47ce-be27-f5a867d8d8cd"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkjNJHugubJBGYfyv.png0c1ddf48-97bb-43ea-bc6b-682fa924909a?alt=media&token=a478945d-3cfb-47ce-be27-f5a867d8d8cd",
+            "name": "Blonde Sylvie+13"
+        },
+        "title": "Blonde Sylvie 13",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/13"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Cool Rafiki+14",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Rafiki, but far away from pride rock. Wearing sunglasses, a t-shirt and enjoying some fresh tobacco",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/14",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkJYUUTygjjOKIY8thV.png89bdb25d-9074-470a-abf7-74eaacfada22?alt=media&token=40f4527c-8ef1-4c9b-896c-a741087bd12c",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Rafiki, but far away from pride rock. Wearing sunglasses, a t-shirt and enjoying some fresh tobacco",
+        "id": {
+            "tokenId": 14
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/14",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkJYUUTygjjOKIY8thV.png89bdb25d-9074-470a-abf7-74eaacfada22?alt=media&token=40f4527c-8ef1-4c9b-896c-a741087bd12c"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FkJYUUTygjjOKIY8thV.png89bdb25d-9074-470a-abf7-74eaacfada22?alt=media&token=40f4527c-8ef1-4c9b-896c-a741087bd12c",
+            "name": "Cool Rafiki+14"
+        },
+        "title": "Cool Rafiki 14",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/14"
+        }
+    },
+    {
+        "contract": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "contractMetadata": {
+            "contractDeployer": "0xdolapo",
+            "deployedBlockNumber": "",
+            "name": "Drone Sylvie+15",
+            "openSea": {
+                "collectionName": "NFTRopolis",
+                "description": "Sylvie, but controls drone looking things. Wearing a red shirt with red hair. Generally, red looks good",
+                "discordUrl": "",
+                "externalUrl": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/15",
+                "floorPrice": 1.539,
+                "imageUrl": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FUut7GR6uhtJhugUJ.png460dbbd9-2b38-4dc7-a97b-c47fa59dbe7f?alt=media&token=9256afbf-bb18-4a8e-8076-e7fa27b0c2b7",
+                "safelistRequestStatus": "verified",
+                "twitterUsername": "0xdolapo"
+            },
+            "symbol": "NFTR",
+            "tokenType": "ERC721",
+            "totalSupply": ""
+        },
+        "description": "Sylvie, but controls drone looking things. Wearing a red shirt with red hair. Generally, red looks good",
+        "id": {
+            "tokenId": 15
+        },
+        "media": [
+            {
+                "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/15",
+                "raw": "",
+                "thumbnail": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FUut7GR6uhtJhugUJ.png460dbbd9-2b38-4dc7-a97b-c47fa59dbe7f?alt=media&token=9256afbf-bb18-4a8e-8076-e7fa27b0c2b7"
+            }
+        ],
+        "metadata": {
+            "image": "https://firebasestorage.googleapis.com/v0/b/nftropolis-e514a.appspot.com/o/images%2FUut7GR6uhtJhugUJ.png460dbbd9-2b38-4dc7-a97b-c47fa59dbe7f?alt=media&token=9256afbf-bb18-4a8e-8076-e7fa27b0c2b7",
+            "name": "Drone Sylvie+15"
+        },
+        "title": "Drone Sylvie 15",
+        "tokenUri": {
+            "gateway": "https://console.firebase.google.com/project/nftropolis-e514a/database/nftropolis-e514a-default-rtdb/data/NFTs/15"
+        }
+    }
+]

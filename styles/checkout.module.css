@@ -1,6 +1,6 @@
 .checkout {
   /* position: absolute; */
-  box-shadow: 1px 1px 10px black;
+  /* box-shadow: 1px 1px 10px black; */
 }
 
 .checkoutDetails::-webkit-scrollbar {
@@ -12,5 +12,5 @@
 }
 
 .image:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
 }

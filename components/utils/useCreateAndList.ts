@@ -13,9 +13,14 @@ import _storeListings from "../../backend/_storeListings";
 
 
 
-const useCreateAndList = ()=>{
-    
-   //////////////////////////////
+const useCreateAndList = () => {
+
+  //////////////////////////////
+  // THERE MIGHT BE A PROBLEM WITH THIS FUNCTION
+  //THERE IS SUPPOSED TO BE A SETAPPROVALFORALL(MARKETPLACE, TRUE) FUNCTION 
+  ////////////////////////
+
+
 
   ///////////////////
   //this helps me mint NFTs
@@ -27,7 +32,7 @@ const useCreateAndList = ()=>{
     abi: nfTropolisABI.abi,
     functionName: "mintNFT",
     args: [],
-    
+
   });
 
   const { data: mintData,
@@ -197,7 +202,7 @@ const useCreateAndList = ()=>{
   }
 
 
-  return {createItem}
+  return { createItem }
 
 
 }

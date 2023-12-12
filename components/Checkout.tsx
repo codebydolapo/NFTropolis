@@ -1,9 +1,5 @@
 //this component works with the items page in pages/item/items
 import {
-  ShareIcon,
-  DotsVerticalIcon,
-  RefreshIcon,
-  ArrowsExpandIcon,
   ClockIcon,
   XIcon,
 } from "@heroicons/react/outline";
@@ -16,44 +12,44 @@ import { deactivateCheckoutPopup } from "./reducers/action";
 import { addItem } from "./reducers/action";
 import { ethers } from "ethers";
 import { nfTropolisAddress } from "../src/nfTropolisAddress";
+import { saveCheckoutData } from "./reducers/action";
+import { Matic } from "@web3uikit/icons";
+import { Twitter } from "lucide-react";
+import useBuyItem from "./utils/useBuyItem";
+import { useAccount } from "wagmi";
 
 function Checkout() {
-  interface Items {
-    image?: string;
-    name?: string;
-    index: string;
-    price: string;
-  }
 
-  function etherToWei(_etherAmount: any) {
-    return ethers.utils.parseUnits(_etherAmount, "ether");
-  }
+  const { purchaseItem } = useBuyItem
+  
+  const { address } = useAccount();
+
 
   const dispatch = useDispatch();
 
-  const marketplace = useSelector((state: any) => {
-    return state.marketplaceContract;
+  const {
+    description,
+    name,
+    tokenId,
+    contract,
+    image,
+    raw,
+    timeLastUpdated,
+    twitter,
+    deployer,
+    price,
+    owner,
+    collectionName
+  } = useSelector((state: { checkoutData: any }) => {
+    return state.checkoutData;
   });
 
-  const { image, index, name, price }: Items = useSelector((state: any) => {
-    return state.itemData;
-  });
-
-  const account = useSelector((state: { account: string }) => {
-    return state.account;
-  });
+  function buy() {
+  }
 
   async function handlePurchase() {
-    if (account) {
-    //     const minter = await marketplace.ownerOf(index)
-    //   await minter.approve(nfTropolisAddress, index);
-
-    //   console.log(await marketplace.ownerOf(index))
-      const payReceipt = await marketplace.buyNFT(index, {
-        value: etherToWei(`${0.001}`),
-        from: account,
-      });
-      console.log(payReceipt);
+    if (address) {
+      purchaseItem(contract.address, tokenId, address, price)
     } else {
       alert("Please Connect Wallet!");
     }
@@ -61,7 +57,16 @@ function Checkout() {
 
   function closePopup() {
     dispatch(deactivateCheckoutPopup());
-    dispatch(addItem({}));
+    dispatch(saveCheckoutData({}));
+  }
+
+  function truncateString(length: number, str?: any): string | undefined {
+    if (str?.length <= length) {
+      return str; // No truncation needed
+    }
+    else {
+      return str?.slice(0, length) + "..."; // Truncate and add ellipsis
+    }
   }
 
 
@@ -69,7 +74,7 @@ function Checkout() {
 
   return (
     <div
-      className={`md:w-[95%] md:h-[90vh] h-auto flex md:flex-row md:top-[5vh] bg-white xs:flex-col xs:h-[100vh] xs:w-[98%] absolute rounded-lg xs:top-[50px] left-auto ${styles.checkout}`}
+      className={`md:w-[100%] h-auto flex md:flex-row md:mt-[30px] md:top-[5vh] bg-white xs:flex-col xs:h-[100vh] xs:w-[98%] absolute m-auto left-0 right-0 top-0 bottom-0 rounded-lg xs:top-[50px] ${styles.checkout}`}
     >
       <div
         className={`md:w-[40%] md:h-[100%] flex justify-center md:items-start pt-10 xs:w-[100%] xs:mb-4 xs:items-center xs:h-[45%] overflow-hidden `}
@@ -93,7 +98,7 @@ function Checkout() {
             <h1
               className={`text-[#1da1f2] mr-1 md:text-xl font-bold xs:text-lg`}
             >
-              CodeByDolapo: NFT Swarm
+              0xDolapo: {collectionName}
             </h1>
             <img
               className={`md:w-8 h-auto xs:w-5`}
@@ -128,7 +133,7 @@ function Checkout() {
         <div className={`w-full h-[12%] flex items-center justify-start px-5`}>
           <div className={`w-[25%] h-full flex items-center justify-start`}>
             <h1 className={`font-bold md:text-lg xs:text-sm text-[#000000a1]`}>
-              Owned by #{Math.floor(Math.random() * 1000)}
+              Owned by {owner ? truncateString(6, owner) : truncateString(6, "0x00000000000000000000000")}
             </h1>
           </div>
           <div className={`w-[25%] h-full flex items-center justify-start`}>
@@ -166,10 +171,13 @@ function Checkout() {
               <h1 className={`font-bold text-base text-[#00000073]`}>
                 Current Price
               </h1>
-              <h1 className={`font-bold text-3xl text-[#000000d2]`}>
-                {0.0001}
-                <sub className={`font-extrabold text-sm `}>$MATIC</sub>
-              </h1>
+              <div className={`w-[5rem] flex items-center justify-around`}>
+
+                <h1 className={`font-bold text-3xl text-[#000000d2] `}>
+                  {price ? price : 0.000}
+                </h1>
+                <Matic fontSize={"2rem"} />
+              </div>
             </div>
 
             <div
@@ -177,7 +185,7 @@ function Checkout() {
             >
               <div
                 className={`w-[12rem] h-[4rem] border-2 border-grey rounded-xl mr-2 bg-[#1da1f2] flex items-center justify-center cursor-pointer`}
-                onClick={handlePurchase}
+              // onClick={handlePurchase}
               >
                 <CashIcon className={`text-white w-9 mr-2`} />
                 <h1 className={`text-white text-base font-bold`}>Buy Now</h1>
@@ -185,9 +193,9 @@ function Checkout() {
               <div
                 className={`w-[12rem] h-[4rem] border-2 border-grey rounded-xl mr-2 flex items-center justify-center`}
               >
-                <TagIcon className={`text-[#1da1f2] w-8 mr-2`} />
+                <Twitter className={`text-[#1da1f2] w-8 mr-2`} />
                 <h1 className={`text-[#1da1f2] text-base font-bold`}>
-                  Make Offer
+                  {twitter ? twitter : "@unknown"}
                 </h1>
               </div>
             </div>

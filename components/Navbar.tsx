@@ -79,10 +79,10 @@ function Navbar() {
   }
 
   ///////////////////////////////////
-  const { address } = useAccount();
-  useEffect(() => {
-    address ?? console.log(address);
-  }, [address]);
+  // const { address } = useAccount();
+  // useEffect(() => {
+  //   address ?? console.log(address);
+  // }, [address]);
   //////////////////////////////////
 
   return (

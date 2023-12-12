@@ -84,6 +84,18 @@ export const filePath = (state = "", action: { type: string; filePath: string })
     }
 }
 
+export const checkoutData = (state = "", action: { type: string; checkoutData: any }) => {
+    switch (action.type) {
+        case "SAVE_CHECKOUT_DATA":
+            console.log(action.checkoutData)
+            return action.checkoutData
+        default:
+            return state
+    }
+}
+
+
+
 
 
 export const allReducers = combineReducers({
@@ -93,5 +105,6 @@ export const allReducers = combineReducers({
     NFTData,
     hamburgerState,
     file,
-    filePath
+    filePath,
+    checkoutData
 })

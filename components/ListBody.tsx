@@ -7,6 +7,7 @@ import { Eth, Matic, Avax } from "@web3uikit/icons";
 import _handleCreate from "../backend/_handleCreate"
 import useListItem from "./utils/useListItem";
 import { ViewListIcon } from "@heroicons/react/outline";
+import _storeListings from "../backend/_storeListings";
 
 
 
@@ -323,8 +324,8 @@ function CreateBody() {
                             variant="contained"
                             endIcon={<ViewListIcon className={`w-[1.5rem]`} />}
                             className={`bg-[#0080FF] capitalize text-base`}
-                            // onClick={() => listItem()}
-                            onClick={() => listNFT?.()}
+                            onClick={() => listItem?.()}
+                            // onClick={() => _storeListings(address, tokenId, price)}
                         >
                             List
                         </Button>

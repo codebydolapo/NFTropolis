@@ -5,6 +5,7 @@ import { deactivateEditorPopup, activateEditorPopup, saveFile, saveFilePath } fr
 import { toast } from "react-hot-toast";
 import _handleCreate from "../../backend/_handleCreate"
 import useCreateAndList from "../utils/useCreateAndList";
+import { nfTropolisAddress } from "../../src/nfTropolisAddress";
 
 const useCollectData = () => {
 
@@ -17,9 +18,11 @@ const useCollectData = () => {
     const [price, setPrice] = useState(0);
     const [listingStatus, setListingStatus] = useState(false)
     const [externalLink, setExternalLink] = useState('')
+    const [tokenId, setTokenId] = useState(0)
     const [chain, setChain] = useState('Polygon');
 
     const priceRef = useRef<string | number>("");
+    const tokenIdRef = useRef<string | number>("");
 
     const editState = useSelector((state: any) => {
         return state.imageEditorPopupState;
@@ -56,8 +59,13 @@ const useCollectData = () => {
     };
 
     const handlePriceUpdate = (event: any) => {
-        priceRef.current = parseInt(event.target.value)
+        // priceRef.current = parseInt(event.target.value)
         setPrice(parseInt(event.target.value));
+    };
+
+    const handleTokenIdUpdate = (event: any) => {
+        // tokenIdRef.current = parseInt(event.target.value)
+        setTokenId(parseInt(event.target.value));
     };
 
     function handleImageRemove() {
@@ -95,6 +103,7 @@ const useCollectData = () => {
         description, 
         name, 
         price,
+        tokenId,
         externalLink,
         flipEditState,
         handleChainChange,
@@ -104,6 +113,7 @@ const useCollectData = () => {
         handleListingStatus,
         handleNameUpdate,
         handlePriceUpdate,
+        handleTokenIdUpdate,
         handleImageRemove
     }
 
