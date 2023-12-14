@@ -20,13 +20,13 @@ import { useAccount } from "wagmi";
 
 function Checkout() {
 
-  const { purchaseItem } = useBuyItem
   
   const { address } = useAccount();
-
-
+  
   const dispatch = useDispatch();
-
+  
+  
+  
   const {
     description,
     name,
@@ -43,13 +43,13 @@ function Checkout() {
   } = useSelector((state: { checkoutData: any }) => {
     return state.checkoutData;
   });
+  
+  const { purchaseItem } = useBuyItem(contract.address, tokenId, address)
 
-  function buy() {
-  }
 
   async function handlePurchase() {
     if (address) {
-      purchaseItem(contract.address, tokenId, address, price)
+      purchaseItem()
     } else {
       alert("Please Connect Wallet!");
     }
@@ -185,7 +185,7 @@ function Checkout() {
             >
               <div
                 className={`w-[12rem] h-[4rem] border-2 border-grey rounded-xl mr-2 bg-[#1da1f2] flex items-center justify-center cursor-pointer`}
-              // onClick={handlePurchase}
+              onClick={handlePurchase}
               >
                 <CashIcon className={`text-white w-9 mr-2`} />
                 <h1 className={`text-white text-base font-bold`}>Buy Now</h1>

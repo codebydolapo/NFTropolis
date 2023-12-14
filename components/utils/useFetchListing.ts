@@ -8,7 +8,7 @@ require("dotenv").config()
 import { nfTropolisAddress } from "../../src/nfTropolisAddress";
 
 
-const useFetchPrice = (address: string, tokenId: string | number): {
+const useFetchListing = (address: string, tokenId: string | number): {
   // Specify the types of values returned
   // data: {price: string, seller: string};
   listing: {price: string, seller: string} | any;
@@ -41,4 +41,4 @@ const useFetchPrice = (address: string, tokenId: string | number): {
 
 }
 
-export default useFetchPrice
+export default useFetchListing

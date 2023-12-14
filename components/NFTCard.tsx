@@ -11,30 +11,27 @@ import CheckIcon from "@mui/icons-material/Check";
 import { Button } from "@mui/material";
 import toast from 'react-hot-toast';
 import { Nft } from "alchemy-sdk";
-import useFetchPrice from "./utils/useFetchPrice";
+import useFetchListing from "./utils/useFetchListing";
 import { ethers } from "ethers";
 
 
 
 function NFTCard({ description, name, tokenId, contract, image, raw, timeLastUpdated, twitter, deployer, collectionName }: Nft | any) {
+
   const dispatch = useDispatch();
 
   const [price, setPrice] = useState<string | number>(0)
 
   const { isConnected } = useAccount();
 
-
-
-  const { listing, listingRefetch } = useFetchPrice(contract.address, tokenId)
+  const { listing, listingRefetch } = useFetchListing(contract.address, tokenId)
 
 
   useEffect(() => {
     listingRefetch?.()
     console.log(listing)
-    setPrice(ethers.utils.formatEther(listing.price))
+    setPrice(listing ? ethers.utils.formatEther(listing.price): "0")
   }, [listing])
-
-
 
 
   function handleCheckout() {

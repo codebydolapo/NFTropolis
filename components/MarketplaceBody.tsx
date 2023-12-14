@@ -5,7 +5,7 @@ import NFTCard from "./NFTCard";
 import Checkout from "./Checkout";
 import { Nft, BaseNft } from "alchemy-sdk";
 // import { Nft, BaseNft} from "alchemy-sdk";
-import useFetchPrice from "./utils/useFetchPrice";
+import useFetchPrice from "./utils/useFetchListing";
 
 
 function MarketplaceBody() {
